@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Bilyk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- <link rel="icon" href="mac-icon.png" type="image/png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicons/favicon-64x64.png"> -->
+    <link rel="icon" type="image/png" sizes="128x128" href="favicon-128x128.png">
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .profile-icon {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .intro h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .intro p {
+            font-size: 1.2em;
+            color: #777;
+            margin: 5px 0 20px;
+        }
+
+        .about-me p {
+            font-size: 1em;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            display: inline-block;
+            color: #1e90ff;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            transition: transform 0.3s cubic-bezier(0.25, 1.3, 0.5, 1), background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .links a:hover {
+            transform: scale(1.1);
+            background-color: #E5F3FD;
+            color: #333;
+        }
+
+        .language-switch {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-switch button {
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .language-switch button:hover {
+            background-color: #d0d0d0;
+        }
+
+         .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(10px); /* Start a bit below */
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0); /* End in normal position */
+                opacity: 1;
+            }
+        }
+
+
+        .dino-wrapper {
+            overflow: hidden; /* so it doesn’t push page layout */
+            width: 120px; /* give it room */
+            height: 100px;
+            position: relative;
+        }
+
+        .dino {
+            transition: transform 1s ease-in-out;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .dino:hover {
+            animation: dinoRide 2.5s ease-in-out forwards;
+        }
+
+        @keyframes dinoRide {
+            0% {
+                transform: rotate(0deg) translateX(0);
+            }
+            20% {
+                transform: rotate(0deg) translateX(0);
+            }
+            100% {
+                transform: rotate(180deg) translateX(300px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile-section fade-in">
+            <img src="dino.png" alt="An icon of the Apple Macintosh computer." class="profile-icon" />
+            <div class="intro fade-in">
+                <h1 id="name">👋🏼 Hi, I'm Daniel</h1>
+                <p id="about-text">I used to work at a reception in a hostel, then at a bar in the hostel. Having studied aircraft maintenance and political science, I now work as a full-time product manager, and a part-time podcast producer.</p>
+            </div>
+        </div>
+
+        <div class="dino-wrapper">
+            <img src="dino.png" alt="A dino on a skateboard" class="profile-icon dino" />
+        </div>
+
+        <!-- Contact Form -->
+        <section class="contact-form fade-in">
+            <h2 id="contact-header">Get in Touch</h2>
+            <form>
+                <label id="email-label" for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label id ="message-label" for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button id="submit-button" type="submit">Send</button>
+            </form>
+        </section>
+
+        <div class="links fade-in">
+            <a href="https://twitter.com/daniel_bilyk" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://open.spotify.com/user/h42nenxcsz7c0i458kqt1g7gj" target="_blank"><i class="fab fa-spotify"></i></a>
+            <a href="https://github.com/danielbilyk" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+    <div class="language-switch fade-in">
+            <button onclick="switchLanguage('en')">English</button>
+            <button onclick="switchLanguage('ua')">Українська</button>
+        </div>
+
+    <script>
+    function switchLanguage(lang) {
+    localStorage.setItem('selectedLanguage', lang); // Save selected language to localStorage
+    fetch(`${lang}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Iterate over all keys in the fetched JSON object
+            for (const [key, value] of Object.entries(data)) {
+                const element = document.getElementById(key);
+                
+                // Update element if it exists in the HTML
+                if (element) {
+                    element.innerText = value;
+                } else {
+                    console.warn(`Warning: No element found with ID '${key}'.`);
+                }
+            }
+
+            // Log a warning for HTML elements that might not be present in JSON
+            const elements = document.querySelectorAll("[id]");
+            elements.forEach(el => {
+                if (!data.hasOwnProperty(el.id)) {
+                    console.warn(`Warning: No translation key found for element ID '${el.id}'. It will not be updated.`);
+                }
+            });
+        })
+        .catch(error => console.error('Error loading language file:', error));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            switchLanguage(savedLanguage);
+
+            // Set animation delay for each element with the fade-in class
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            fadeInElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+
+</body>
+</html>
