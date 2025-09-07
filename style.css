@@ -1,3 +1,7 @@
+html, body {
+    overflow-x: hidden;
+}
+
 :root {
     --background: #ffffff;
     --text-primary: #171717;
@@ -18,6 +22,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .container {
@@ -292,6 +297,32 @@ footer.fade-in {
     }
 }
 
+@media (max-width: 768px) {
+    .dino-on-line {
+        width: 65px;
+        animation-duration: 10s;
+    }
+    
+    @keyframes skateAcross {
+        0% {
+            left: calc(100vw + 40px);
+            opacity: 0;
+        }
+        3% {
+            left: calc(100vw + 40px);
+            opacity: 1;
+        }
+        97% {
+            left: -100px;
+            opacity: 1;
+        }
+        100% {
+            left: -100px;
+            opacity: 0;
+        }
+    }
+}
+
 @media (max-width: 480px) {
     .container {
         padding: 2rem 1rem;
@@ -362,10 +393,42 @@ footer.fade-in {
     text-align: center;
 }
 
+.dino-line-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 .section-divider {
     border: none;
     border-top: 1px solid var(--border);
-    margin-bottom: 3rem; /* Tighter spacing */
+    width: 100%;
+    margin: 0;
+}
+
+.dino-on-line {
+    position: fixed;
+    width: 100px; /* Desktop: bigger */
+    height: auto;
+    z-index: 2;
+    top: 0; /* will be set by JS */
+    left: 100vw; /* Start off-screen right */
+    
+    /* Position dino to skate ON the line (not through it) */
+    transform: translateY(-85%);
+    animation: skateAcross 12s linear infinite; /* Desktop: slower */
+}
+
+@keyframes skateAcross {
+    from {
+        transform: translateY(-85%) translateX(0);
+    }
+    to {
+        /* Travel across the screen (100vw) plus its own max width (100px) */
+        transform: translateY(-85%) translateX(calc(-100vw - 100px)); 
+    }
 }
 
 .connect-section h2 {
@@ -493,6 +556,30 @@ footer.fade-in {
     }
     .icon-links {
         justify-content: center;
+    }
+
+    /* Smaller dino on mobile */
+    .dino-on-line {
+        width: 50px;
+    }
+    
+    @keyframes skateAcross {
+        0% {
+            left: calc(100vw + 30px);
+            opacity: 0;
+        }
+        3% {
+            left: calc(100vw + 30px);
+            opacity: 1;
+        }
+        97% {
+            left: -80px;
+            opacity: 1;
+        }
+        100% {
+            left: -80px;
+            opacity: 0;
+        }
     }
 
     /* Disable animations on mobile */

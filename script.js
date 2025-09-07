@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     // --- Header Pill Navigation ---
     const pillContainers = document.querySelectorAll('.pill-container');
 
@@ -38,4 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
             waveEmoji.classList.add('wave-animation-active'); // A class to trigger the animation
         }, 1000); // 1-second delay
     }
+
+    // --- Dino Positioning ---
+    const dino = document.querySelector('.dino-on-line');
+    const line = document.querySelector('.section-divider');
+    const footer = document.querySelector('.connect-section');
+
+    function positionDino() {
+        if (dino && line) {
+            const lineRect = line.getBoundingClientRect();
+            // Position fixed is relative to the viewport, so we only need getBoundingClientRect().top
+            dino.style.top = `${lineRect.top}px`;
+        }
+    }
+
+    // Position dino after the footer animation finishes, then on resize/scroll.
+    if (footer) {
+        footer.addEventListener('animationend', positionDino, { once: true });
+    } else {
+        // Fallback if there's no animation for some reason.
+        positionDino();
+    }
+    
+    window.addEventListener('resize', positionDino);
+    window.addEventListener('scroll', positionDino);
 });
