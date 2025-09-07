@@ -301,7 +301,7 @@ footer.fade-in {
 /* --- Connect Section --- */
 
 .connect-section {
-    margin-top: 5rem;
+    margin-top: 3rem;
     text-align: center;
 }
 
@@ -460,71 +460,89 @@ footer.fade-in {
 }
 
 .connect-column h3 {
-    font-size: 1.125rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
 }
 
-.icon-links {
+.contact-list {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    position: relative;
-    background: transparent;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.icon-link {
-    position: relative;
+.contact-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    z-index: 1;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.icon-link::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60px;
-    height: 60px;
-    background-color: rgba(229, 243, 253, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 16px;
-    
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: -1;
+.contact-item:hover {
+    background-color: rgba(229, 243, 253, 0.5);
+    transform: translateY(-1px);
 }
 
-.icon-link:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-.icon-link img {
-    position: absolute;
+.contact-icon {
+    position: relative;
+    width: 32px;
     height: 32px;
-    width: auto;
+    flex-shrink: 0;
+}
+
+.contact-icon img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
     transition: opacity 0.3s ease;
-    z-index: 1;
 }
 
-.icon-link .icon-color {
+.contact-icon .icon-color {
     opacity: 0;
 }
 
-.icon-link:hover .icon-mono {
+.contact-item:hover .contact-icon .icon-mono {
     opacity: 0;
 }
 
-.icon-link:hover .icon-color {
+.contact-item:hover .contact-icon .icon-color {
     opacity: 1;
+}
+
+.contact-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Vibe check 2x2 grid layout */
+.vibe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.vibe-grid .contact-item {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+}
+
+.vibe-grid .contact-name {
+    font-size: 0.875rem;
 }
 
 /* Simple clean layout for index page */
@@ -581,15 +599,31 @@ footer.fade-in {
 }
 
 /* Responsive adjustments for Connect Section */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .connect-grid {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 3rem;
+        gap: 2.5rem;
     }
-    .icon-links {
-        justify-content: center;
+    
+    .connect-column {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .contact-list {
+        align-items: center;
+    }
+    
+    .vibe-grid {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .connect-grid {
+        gap: 2rem;
     }
     
     .connect-simple {
