@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
 :root {
     --background: #ffffff;
     --text-primary: #171717;
@@ -39,7 +37,7 @@ header {
     display: inline-flex;
     border-radius: 999px;
     padding: 0.5rem;
-    background: linear-gradient(90deg, #F2DDDE, #89ABE3);
+    background: #E5F3FD;
     overflow: hidden;
 }
 
@@ -57,25 +55,62 @@ header {
     color: var(--text-primary);
 }
 
-/* INDICATOR IS NOW MORE TRANSLUCENT */
 .nav-indicator {
     position: absolute;
     height: calc(100% - 1rem);
     top: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.75); /* Increased transparency for a subtler effect */
+    background-color: rgba(229, 243, 253, 0.85); /* Unified frosted blue */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 999px;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease-out;
     z-index: 0;
     opacity: 0;
 }
 
+/* --- Override: Header should use white frosted glass for contrast --- */
+header .nav-indicator {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* Staggered Animation Delays */
+header.fade-in {
+    animation-delay: 0.1s;
+}
+main.fade-in {
+    animation-delay: 0.2s;
+}
+footer.fade-in {
+    animation-delay: 0.3s;
+}
+
+/* --- Waving Hand Animation --- */
+@keyframes wave-animation {
+    0% { transform: rotate(0.0deg); }
+    10% { transform: rotate(14.0deg); }
+    20% { transform: rotate(-8.0deg); }
+    30% { transform: rotate(14.0deg); }
+    40% { transform: rotate(-4.0deg); }
+    50% { transform: rotate(10.0deg); }
+    /* Slow down the return to neutral */
+    70% { transform: rotate(0.0deg); }
+    100% { transform: rotate(0.0deg); }
+}
+
+.wave-animation-active {
+    animation-name: wave-animation;
+    animation-duration: 3.5s; /* Slower animation */
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out; /* Slow down at the end */
+    transform-origin: 70% 70%;
+    display: inline-block;
+}
+
 .fade-in {
-    animation: fadeInAnimation 0.5s 0.2s ease-in-out forwards, slideUpAnimation 0.6s 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    animation: fadeInAnimation 0.5s ease-in-out forwards, slideUpAnimation 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     opacity: 0;
     transform: translateY(20px);
+    /* Delay is now applied via specific classes */
 }
 
 @keyframes fadeInAnimation {
@@ -89,10 +124,25 @@ header {
 }
 
 
+.hero-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dino-userpic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
 .hero h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     line-height: 1.2;
 }
 
@@ -101,6 +151,20 @@ header {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     max-width: 90%;
+}
+
+.dino-gif-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dino-gif {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .social-links-container {
@@ -206,8 +270,46 @@ header {
     color: var(--text-secondary);
 }
 
-/* FIXED: RESPONSIVE STYLES FOR SOCIAL LINKS */
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+    .hero-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .dino-userpic {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .dino-gif {
+        max-width: 250px;
+    }
+}
+
 @media (max-width: 480px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero .subtitle {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+    
+    .dino-gif {
+        max-width: 200px;
+    }
+    
     .social-links.pill-container {
         flex-wrap: wrap;
         justify-content: center;
@@ -250,5 +352,151 @@ header {
     }
      .timeline-item {
         padding-left: 0;
+    }
+}
+
+/* --- Connect Section --- */
+
+.connect-section {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin-bottom: 3rem; /* Tighter spacing */
+}
+
+.connect-section h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem; /* Tighter spacing */
+}
+
+.connect-anchor {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.connect-anchor::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(229, 243, 253, 0.85); /* Subtle frosted blue */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px; /* Squircle shape */
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+.connect-anchor:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.connect-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    text-align: left;
+}
+
+.connect-column h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.icon-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: relative;
+    background: transparent;
+}
+
+.icon-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    z-index: 1;
+}
+
+.icon-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(229, 243, 253, 0.85); /* Subtle frosted blue */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px; /* Squircle shape */
+    
+    /* Center, fade, and scale down by default */
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+.icon-link:hover::before {
+    /* Scale up and fade in on hover */
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.icon-link img {
+    position: absolute;
+    height: 28px;
+    width: auto;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.icon-link .icon-color {
+    opacity: 0;
+}
+
+.icon-link:hover .icon-mono {
+    opacity: 0;
+}
+
+.icon-link:hover .icon-color {
+    opacity: 1;
+}
+
+/* Responsive adjustments for Connect Section */
+@media (max-width: 480px) {
+    .connect-grid {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 3rem;
+    }
+    .icon-links {
+        justify-content: center;
+    }
+
+    /* Disable animations on mobile */
+    .nav-indicator {
+        transition: none;
     }
 }

@@ -1,54 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all pill containers on the page
+    // --- Header Pill Navigation ---
     const pillContainers = document.querySelectorAll('.pill-container');
 
-    // Iterate over each container to set up its unique logic
     pillContainers.forEach(container => {
         const links = container.querySelectorAll('.nav-link');
         const indicator = container.querySelector('.nav-indicator');
         const activeLink = container.querySelector('.nav-link.active');
 
-        // Function to move the indicator within the current container
-        function moveIndicator(element) {
-            if (element && indicator) {
-                indicator.style.width = `${element.offsetWidth}px`;
-                indicator.style.left = `${element.offsetLeft}px`;
-                indicator.style.opacity = '1'; // Make it visible
-            }
+        function moveIndicator(target) {
+            if (!indicator || !target) return;
+            indicator.style.width = `${target.offsetWidth}px`;
+            indicator.style.left = `${target.offsetLeft}px`;
+            indicator.style.opacity = '1';
         }
 
-        // Function to hide the indicator
-        function hideIndicator() {
-            if (indicator) {
-                indicator.style.opacity = '0';
-            }
-        }
-
-        // Set initial position for the indicator
         if (activeLink) {
-            // This is for the main navigation, which has an active state
-            moveIndicator(activeLink);
-        } else {
-            // This is for the social links, which have no initial active state
-            hideIndicator();
+            setTimeout(() => moveIndicator(activeLink), 50);
         }
 
-        // Add event listeners to the links within this container
         links.forEach(link => {
-            link.addEventListener('mouseover', () => {
-                moveIndicator(link);
-            });
+            link.addEventListener('mouseenter', () => moveIndicator(link));
         });
 
-        // Add a mouseleave listener to the whole container
         container.addEventListener('mouseleave', () => {
             if (activeLink) {
-                // If there's an active link (main nav), return to it
                 moveIndicator(activeLink);
-            } else {
-                // If there's no active link (social links), hide the indicator
-                hideIndicator();
+            } else if (indicator) {
+                indicator.style.opacity = '0';
             }
         });
     });
+
+    // --- Waving Hand Animation Trigger ---
+    const waveEmoji = document.querySelector('.wave');
+    if (waveEmoji) {
+        setTimeout(() => {
+            waveEmoji.classList.add('wave-animation-active'); // A class to trigger the animation
+        }, 1000); // 1-second delay
+    }
 });
