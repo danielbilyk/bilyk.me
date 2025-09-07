@@ -243,9 +243,6 @@ footer.fade-in {
         height: 50px;
     }
     
-}
-
-@media (max-width: 768px) {
     .dino-on-line {
         width: 65px;
         animation-duration: 10s;
@@ -305,9 +302,6 @@ footer.fade-in {
     text-align: center;
 }
 
-.dino-footer {
-    margin-top: 2rem;
-}
 
 .site-footer {
     margin-top: 3rem;
@@ -417,6 +411,7 @@ footer.fade-in {
     color: inherit;
     border-bottom: 1px solid #38694B;
     position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .hover-link::before {
@@ -432,13 +427,6 @@ footer.fade-in {
     border-radius: 6px;
     opacity: 0;
     z-index: -1;
-}
-
-.hover-link {
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.hover-link::before {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -545,58 +533,6 @@ footer.fade-in {
     font-size: 0.875rem;
 }
 
-/* Simple clean layout for index page */
-.connect-simple {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2.5rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.connect-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-    color: var(--text-secondary);
-    position: relative;
-    padding: 1rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.connect-link:hover {
-    color: var(--text-primary);
-    background-color: rgba(229, 243, 253, 0.5);
-}
-
-.connect-link img {
-    height: 32px;
-    width: auto;
-    transition: opacity 0.3s ease;
-}
-
-.connect-link .icon-color {
-    position: absolute;
-    opacity: 0;
-}
-
-.connect-link:hover .icon-mono {
-    opacity: 0;
-}
-
-.connect-link:hover .icon-color {
-    opacity: 1;
-}
-
-.connect-link span {
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
 
 /* Progressive icon scaling to maintain two-column layout longer */
 @media (max-width: 900px) {
@@ -681,14 +617,6 @@ footer.fade-in {
 }
 
 @media (max-width: 480px) {
-    .connect-simple {
-        gap: 1.5rem;
-    }
-    
-    .connect-link {
-        padding: 0.75rem;
-    }
-
     /* Smaller dino on mobile */
     .dino-on-line {
         width: 50px;

@@ -71,13 +71,6 @@ window.addEventListener('load', () => {
                 const offsetFromLine = dinoHeight * 0.85;
                 dino.style.top = `${lineRect.top - offsetFromLine}px`;
                 
-                // Debug: log positioning info
-                console.log('Dino positioned:', {
-                    lineTop: lineRect.top,
-                    dinoHeight,
-                    offsetFromLine,
-                    finalTop: lineRect.top - offsetFromLine
-                });
             });
         }
     }
@@ -96,7 +89,6 @@ window.addEventListener('load', () => {
         const footerExists = document.querySelector('.site-footer');
         const dinoLoaded = dino && (dino.complete || dino.offsetHeight > 0);
         
-        console.log('Checking readiness:', { footerExists, dinoLoaded, dinoHeight: dino?.offsetHeight });
         
         if (footerExists && dinoLoaded) {
             // Wait 2 seconds, then position and start animation
@@ -117,7 +109,6 @@ window.addEventListener('load', () => {
                                 (node.classList?.contains('site-footer') || 
                                  node.querySelector?.('.site-footer'))) {
                                 observer.disconnect();
-                                console.log('Footer detected via observer');
                                 // Footer added, try positioning again
                                 setTimeout(waitForFooterAndImage, 50);
                                 return;
@@ -140,7 +131,6 @@ window.addEventListener('load', () => {
         if (!dinoLoaded && dino) {
             if (!dino.complete) {
                 dino.addEventListener('load', () => {
-                    console.log('Dino image loaded');
                     waitForFooterAndImage();
                 }, { once: true });
             }
