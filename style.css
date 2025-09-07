@@ -598,34 +598,89 @@ footer.fade-in {
     transition: color 0.3s ease;
 }
 
-/* Responsive adjustments for Connect Section */
-@media (max-width: 768px) {
+/* Progressive icon scaling to maintain two-column layout longer */
+@media (max-width: 900px) {
+    .contact-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .contact-icon img {
+        width: 28px;
+        height: 28px;
+    }
+    
     .connect-grid {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 2.5rem;
-    }
-    
-    .connect-column {
-        width: 100%;
-        max-width: 400px;
-    }
-    
-    .contact-list {
-        align-items: center;
+        gap: 3rem;
     }
     
     .vibe-grid {
-        max-width: 280px;
+        max-width: 260px;
+    }
+}
+
+@media (max-width: 700px) {
+    .contact-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .contact-icon img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .connect-grid {
+        gap: 2.5rem;
+    }
+    
+    .vibe-grid {
+        max-width: 240px;
+    }
+    
+    .vibe-grid .contact-item {
+        padding: 0.75rem 0.25rem;
+    }
+}
+
+/* Keep two columns even on small screens, just make icons smaller */
+@media (max-width: 550px) {
+    .connect-grid {
+        gap: 1.5rem;
+    }
+    
+    .contact-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .contact-icon img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .vibe-grid {
+        max-width: 200px;
+    }
+    
+    .vibe-grid .contact-item {
+        padding: 0.5rem 0.2rem;
+    }
+    
+    .vibe-grid .contact-name {
+        font-size: 0.75rem;
+    }
+    
+    .contact-item {
+        padding: 0.5rem;
+    }
+    
+    .contact-name {
+        font-size: 0.875rem;
     }
 }
 
 @media (max-width: 480px) {
-    .connect-grid {
-        gap: 2rem;
-    }
-    
     .connect-simple {
         gap: 1.5rem;
     }
