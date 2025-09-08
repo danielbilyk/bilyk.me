@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Remove .html extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [L]
+
+# Redirect .html URLs to clean URLs (for SEO and consistency)
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1? [NC,L,R=301]
+
+# Handle root domain - serve index.html for bilyk.me/
+DirectoryIndex index.html
+
