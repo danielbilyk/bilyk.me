@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Daniel Bilyk</title>
-    <meta name="description" content="A collection of projects I've worked on.">
+    <meta name="description" content="Some of the things I've done.">
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bilyk.me/projects">
     <meta property="og:title" content="Projects - Daniel Bilyk">
-    <meta property="og:description" content="A collection of projects I've worked on.">
+    <meta property="og:description" content="Some of the things I've done.">
     <meta property="og:image" content="https://bilyk.me/static/dino-userpic.png">
     
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="https://bilyk.me/projects">
     <meta property="twitter:title" content="Projects - Daniel Bilyk">
-    <meta property="twitter:description" content="A collection of projects I've worked on.">
+    <meta property="twitter:description" content="Some of the things I've done.">
     <meta property="twitter:image" content="https://bilyk.me/static/dino-userpic.png">
     
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="static/favicon/dino-favicon.ico" type="image/x-icon">
-    <link rel="icon" href="static/favicon/dino-favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="static/favicon/dino-apple-touch-icon.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/static/favicon/dino-favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon/dino-favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/static/favicon/dino-apple-touch-icon.png">
 </head>
 <body class="projects-page">
     <div class="container">
@@ -40,38 +40,38 @@
         <main class="fade-in">
             <section class="hero">
                 <div class="hero-header">
-                    <img src="static/command.png" alt="Projects Icon" class="dino-userpic">
+                    <img src="/static/command.png" alt="Projects Icon" class="dino-userpic">
                     <h1>Projects</h1>
                 </div>
                 <p class="subtitle">
-                    A collection of things I've built, explored, and learned from along the way.
+                    I love doing things. Here is a collection of some of the things I've done.
                 </p>
             </section>
 
-            <div class="projects-layout">
+            <div class="projects-layout" role="main" aria-label="Projects showcase">
                 <!-- Projects Sidebar -->
-                <aside class="projects-sidebar">
-                    <div class="projects-list">
-                        <!-- Projects will be populated here by JavaScript -->
+                <aside class="projects-sidebar" aria-label="Project list">
+                    <div class="projects-list" role="list">
+                        <!-- Projects will be dynamically inserted here -->
                     </div>
                 </aside>
 
                 <!-- Project Detail Area -->
-                <div class="project-detail">
-                    <!-- Dino neck always visible -->
-                    <img src="static/dino-neck.gif" alt="Dino" class="dino-neck" />
+                <div class="project-detail" aria-label="Project details">
+                    <img src="/static/dino-neck.gif" alt="Animated dinosaur waiting for project selection" class="dino-neck" />
                     
                     <!-- Project content (hidden by default) -->
-                    <div class="project-content" id="project-content" style="display: none;">
+                    <div class="project-content" id="project-content" style="display: none;" role="region" aria-live="polite">
                         <div class="project-image">
-                            <img id="project-img" src="" alt="" />
+                            <img id="project-img" src="" alt="" loading="lazy" />
                         </div>
                         <div class="project-info">
                             <h2 id="project-title"></h2>
-                            <p id="project-description"></p>
+                            <div id="project-description" role="article"></div>
                             <div class="project-actions">
-                                <a id="project-link" href="#" target="_blank" class="project-button" style="display: none;">
-                                    View Project
+                                <a id="project-link" href="#" target="_blank" rel="noopener noreferrer" class="project-button" style="display: none;">
+                                    <span>View Project</span>
+                                    <span class="sr-only">(opens in new tab)</span>
                                 </a>
                             </div>
                         </div>
@@ -81,31 +81,32 @@
         </main>
     </div>
 
-    <img src="static/dino-skating.gif" alt="Dino riding skateboard" class="dino-on-line">
+    <img src="/static/dino-skating.gif" alt="Dino riding skateboard" class="dino-on-line">
 
     <!-- Mobile project overlay -->
-    <div class="project-overlay" id="project-overlay">
+    <div class="project-overlay" id="project-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-project-title">
         <div class="project-overlay-header">
-            <button class="back-button" id="back-button">
-                <span>←</span>
+            <button class="back-button" id="back-button" aria-label="Close project details" type="button">
+                <span aria-hidden="true">←</span>
             </button>
             <h2 id="overlay-project-title"></h2>
         </div>
         <div class="project-image">
-            <img id="overlay-project-img" src="" alt="" />
+            <img id="overlay-project-img" src="" alt="" loading="lazy" />
         </div>
         <div class="project-info">
-            <p id="overlay-project-description"></p>
+            <div id="overlay-project-description" role="article"></div>
             <div class="project-actions">
-                <a id="overlay-project-link" href="#" target="_blank" class="mobile-project-link" style="display: none;">
-                    View Project
+                <a id="overlay-project-link" href="#" target="_blank" rel="noopener noreferrer" class="mobile-project-link" style="display: none;">
+                    <span>View Project</span>
+                    <span class="sr-only">(opens in new tab)</span>
                 </a>
             </div>
         </div>
     </div>
     
-    <script src="footer.js"></script>
-    <script src="script.js"></script>
-    <script src="projects.js"></script>
+    <script src="/footer.js"></script>
+    <script src="/script.js"></script>
+    <script src="/projects.js"></script>
 </body>
 </html>
