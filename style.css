@@ -745,19 +745,29 @@ footer.fade-in {
 }
 
 .dino-neck {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 300px;
+    position: fixed; /* Keep on-screen at all times */
+    /* Position on the far right side, outside main content */
+    --dino-width: clamp(320px, 30vw, 450px); /* Bigger and responsive width */
+    right: clamp(20px, 3vw, 40px); /* Smaller right margin to move further right */
+    left: auto; /* ensure right wins */
+    top: var(--dino-sticky-top, 20px); /* dynamic from JS, with default */
+    width: var(--dino-width); /* bigger but responsive */
     height: auto;
-    z-index: 1;
+    z-index: -1; /* Behind project content */
     opacity: 1;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.2s ease, top 0.2s ease-out, right 0.2s ease-out;
+    pointer-events: none; /* never block interactions */
+}
+
+/* Hide fixed dino when viewport is too narrow for side placement */
+@media (max-width: 980px) {
+    .dino-neck { display: none; }
 }
 
 .dino-neck.hidden {
     opacity: 0;
 }
+
 
 
 
@@ -775,17 +785,26 @@ footer.fade-in {
     overflow: visible;
 }
 
+/* Keep layout height while visually hiding to avoid scroll jumps */
+.project-content.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .project-content.active {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* Project image container -> standardized square cards */
 .project-image {
     width: 100%;
-    /* Keep width full and give a stable, generous height on desktop */
-    height: clamp(260px, 40vh, 520px);
+    /* Square aspect with a modest size */
+    aspect-ratio: 1 / 1;
+    height: auto;
     /* Prevent flex column from shrinking the image when text is long */
-    flex: 0 0 clamp(260px, 40vh, 520px);
+    flex: 0 0 auto;
+    max-width: 420px; /* touch smaller squares on large screens */
     border-radius: 16px;
     overflow: hidden;
     background-color: #f8f9fa;
@@ -793,7 +812,7 @@ footer.fade-in {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem; /* center the square in detail column */
 }
 
 /* Loading state overlay for smooth transitions */
@@ -825,6 +844,8 @@ footer.fade-in {
     object-fit: cover;
     object-position: center;
     transition: opacity 0.3s ease;
+    image-rendering: auto;
+    border-radius: 16px;
 }
 
 .project-info {
@@ -892,6 +913,12 @@ footer.fade-in {
 
 /* Desktop: ensure project detail is visible */
 @media (min-width: 769px) {
+    /* Desktop: make detail panel sticky with dynamic top offset */
+    .projects-page .project-content {
+        position: sticky;
+        top: var(--project-sticky-top, 0px);
+    }
+
     .project-detail {
         display: flex;
     }
@@ -996,9 +1023,11 @@ footer.fade-in {
     
     .project-overlay .project-image {
         width: 100%;
-        height: clamp(200px, 35vh, 420px);
-        flex: 0 0 clamp(200px, 35vh, 420px);
-        margin-bottom: 2rem;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        max-width: 360px;
+        flex: 0 0 auto;
+        margin: 0 auto 2rem;
     }
     
     .project-overlay .project-image img {

@@ -6,20 +6,38 @@
 const CONFIG = {
     MOBILE_BREAKPOINT: 768,
     RESIZE_DEBOUNCE: 150,
-    TRANSITION_DELAY: 400,
+    TRANSITION_DELAY: 1600,
     HOVER_DELAY: 50
 };
 
 // Projects data
 const PROJECTS_DATA = [
     {
-        id: 'project-1',
-        title: 'Sample Project 1',
+        id: 'transponster',
+        title: 'Transponster',
+        year: '2025',
+        summary: 'Speech-to-text as easy as it gets in Slack.',
+        description: 'Production, social and editorial teams grind to a halt without clean transcripts. To help us out, I built a Slack bot on the ElevenLabs API: drop in any audio or video file and it shoots back a polished transcript — both as a text file and a share-ready Google Doc. Supports SRT files for YouTube transcriptions, too.',
+        image: 'https://github.com/danielbilyk/Transponster/blob/main/local/Transponster.png?raw=true',
+        link: 'https://github.com/danielbilyk/Transponster'
+    },
+    {
+        id: 'hot-pie',
+        title: 'Hot Pie Miami',
+        year: '2025',
+        summary: 'An open-world <i>GTA: Vice City</i> helicopter mission with extra steps.',
+        description: 'Production, social and editorial teams grind to a halt without clean transcripts. To help us out, I built a Slack bot on the ElevenLabs API: drop in any audio or video file and it shoots back a polished transcript — both as a text file and a share-ready Google Doc. Supports SRT files for YouTube transcriptions, too.',
+        image: 'https://github.com/danielbilyk/Transponster/blob/main/local/Transponster.png?raw=true',
+        link: 'https://github.com/danielbilyk/Transponster'
+    },
+    {
+        id: 'paliturka',
+        title: 'Палітурка (Book Cover)',
         year: '2024',
-        summary: 'A brief description of the first project.',
-        description: 'This is a more detailed description of the first project. Here you can explain what the project is about, what technologies were used, and what problems it solves.',
-        image: 'https://via.placeholder.com/600x400/E5F3FD/171717?text=Project+1',
-        link: 'https://example.com'
+        summary: 'What\'s to like about books we disliked at school?',
+        description: 'Together with people who thoroughly read for a living, we revised 10 books from the school curriculum whose point we might not have gotten back then.',
+        image: '/projects/paliturka.jpg',
+        link: 'https://paliturka.castos.com/'
     },
     {
         id: 'project-2',
@@ -155,6 +173,10 @@ class ProjectsManager {
                 this.renderProjects();
             }
         }
+
+        // Update sticky top alignment on viewport changes
+        this.updateStickyTopOffset();
+            this.updateDinoStickyTop();
     }
 
     /**
@@ -167,6 +189,13 @@ class ProjectsManager {
         }, CONFIG.RESIZE_DEBOUNCE);
 
         this.addEventListenerWithCleanup(window, 'resize', debouncedResize);
+
+        // Scroll handler to update sticky offset
+        const debouncedScroll = this.debounce(() => {
+            this.updateStickyTopOffset();
+            this.updateDinoStickyTop();
+        }, 50);
+        this.addEventListenerWithCleanup(window, 'scroll', debouncedScroll);
 
         // Mobile back button
         if (this.elements.backButton) {
@@ -271,7 +300,7 @@ class ProjectsManager {
             projectEl.innerHTML = `
                 <div class="project-title">${this.escapeHtml(project.title)}</div>
                 <div class="project-year">${this.escapeHtml(project.year)}</div>
-                <div class="project-summary">${this.escapeHtml(project.summary)}</div>
+                <div class="project-summary">${this.sanitizeHtml(project.summary)}</div>
             `;
             
             // Setup interaction handlers based on device type
@@ -367,7 +396,7 @@ class ProjectsManager {
      * Show project details on desktop
      */
     showDesktopProject(project) {
-        const { projectContent, projectImg, projectTitle, projectDescription, projectLink, dinoNeck } = this.elements;
+        const { projectContent, projectImg, projectTitle, projectDescription, projectLink } = this.elements;
         
         if (!projectContent) {
             console.warn('Desktop project content elements not found');
@@ -377,6 +406,9 @@ class ProjectsManager {
         // Update active state on project items
         this.updateActiveProjectItem(project.id);
 
+        // Ensure sticky offset reflects current scroll position
+        this.updateStickyTopOffset();
+
         const performUpdate = () => {
             // Clear any hide timer that might be running
             if (this.timers.hideProject) {
@@ -384,10 +416,7 @@ class ProjectsManager {
                 delete this.timers.hideProject;
             }
 
-            // Hide dino animation
-            if (dinoNeck) {
-                dinoNeck.classList.add('hidden');
-            }
+            // Dino stays visible and fixed on the right now
 
             // Load image first, then sync text and reveal together
             if (projectImg) {
@@ -414,11 +443,12 @@ class ProjectsManager {
                         }
                     }
 
-                    // Show content
-                    projectContent.style.display = 'flex';
-                    requestAnimationFrame(() => {
-                        projectContent.classList.add('active');
-                    });
+            // Show content without reflow jumps
+            projectContent.style.display = 'flex';
+            projectContent.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                projectContent.classList.add('active');
+            });
                 });
             }
         };
@@ -628,7 +658,7 @@ class ProjectsManager {
      * Hide desktop project details
      */
     hideDesktopProject() {
-        const { projectContent, dinoNeck } = this.elements;
+        const { projectContent } = this.elements;
         
         if (!projectContent) return;
 
@@ -641,12 +671,11 @@ class ProjectsManager {
             }
             
             this.timers.hideProject = setTimeout(() => {
-                projectContent.style.display = 'none';
+                // Keep in flow, just visually hide to avoid scroll jumps
+                projectContent.classList.add('hidden');
+                projectContent.classList.remove('active');
                 
-                // Show dino animation again
-                if (dinoNeck) {
-                    dinoNeck.classList.remove('hidden');
-                }
+                // Dino remains visible; no toggling
                 
                 delete this.timers.hideProject;
             }, CONFIG.TRANSITION_DELAY);
@@ -724,6 +753,95 @@ class ProjectsManager {
             .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
             .replace(/\son\w+\s*=\s*["'][^"']*["']/gi, '')
             .replace(/javascript:/gi, '');
+    }
+
+    /**
+     * Compute and set sticky top offset so that the project image aligns as requested
+     */
+    updateStickyTopOffset() {
+        try {
+            if (this.state.isMobile) return;
+            const { projectContent } = this.elements;
+            if (!projectContent) return;
+
+            // Elements for reference
+            const heroIcon = document.querySelector('.hero-header .dino-userpic');
+            const hero = document.querySelector('.hero');
+            const sidebar = document.querySelector('.projects-sidebar');
+            const layout = document.querySelector('.projects-layout');
+            if (!layout) return;
+
+            const viewportTop = 0; // relative to viewport for sticky
+
+            const heroRect = hero?.getBoundingClientRect();
+            const iconRect = heroIcon?.getBoundingClientRect();
+            const sidebarRect = sidebar?.getBoundingClientRect();
+
+            let topOffset = 0;
+
+            // Case 1: Hero title visible -> align image top with hero icon top
+            if (heroRect && heroRect.bottom > 0) {
+                if (iconRect) {
+                    topOffset = Math.max(iconRect.top, 0);
+                } else {
+                    topOffset = Math.max(heroRect.top, 0);
+                }
+            } else if (sidebarRect && sidebarRect.top >= 0) {
+                // Case 2: Hero scrolled past but sidebar top visible -> align with sidebar top
+                topOffset = Math.max(sidebarRect.top, 0);
+            } else {
+                // Case 3: Neither hero nor sidebar visible -> stick to top
+                topOffset = viewportTop;
+            }
+
+            // Apply as CSS variable on the container root
+            const root = document.querySelector('.projects-page');
+            if (root) {
+                root.style.setProperty('--project-sticky-top', `${Math.round(topOffset)}px`);
+            }
+        } catch (e) {
+            // Non-fatal
+            console.debug('updateStickyTopOffset failed', e);
+        }
+    }
+
+    /**
+     * Compute sticky top for dino: starts aligned to bottom of subtitle area,
+     * then centers vertically in viewport when scrolled past
+     */
+    updateDinoStickyTop() {
+        try {
+            if (this.state.isMobile) return;
+            const root = document.querySelector('.projects-page');
+            const hero = document.querySelector('.hero');
+            const subtitle = document.querySelector('.hero .subtitle');
+            const header = document.querySelector('header');
+
+            if (!root || !hero) return;
+
+            const headerRect = header?.getBoundingClientRect();
+            const subtitleRect = subtitle?.getBoundingClientRect();
+            const heroRect = hero.getBoundingClientRect();
+
+            // Base offset: align dino top to just under the subtitle bottom while hero is on screen
+            let desiredTop = 0;
+            if (heroRect.bottom > 0) {
+                const baseline = subtitleRect ? subtitleRect.bottom : heroRect.bottom - 8;
+                desiredTop = Math.max(Math.round(baseline), 0);
+            } else {
+                // When hero is scrolled past, center dino vertically in viewport
+                desiredTop = Math.round((window.innerHeight - 400) / 2); // 400px approx dino height
+            }
+
+            // Ensure it doesn't overlap nav; add tiny offset under header if visible
+            if (headerRect && headerRect.bottom > 0) {
+                desiredTop = Math.max(desiredTop, Math.round(headerRect.bottom + 8));
+            }
+
+            root.style.setProperty('--dino-sticky-top', `${desiredTop}px`);
+        } catch (e) {
+            console.debug('updateDinoStickyTop failed', e);
+        }
     }
 }
 
