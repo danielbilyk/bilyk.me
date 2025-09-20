@@ -759,6 +759,11 @@ footer.fade-in {
     pointer-events: none; /* never block interactions */
 }
 
+/* Hide dino when any project is active */
+.project-viewing .dino-neck {
+    opacity: 0;
+}
+
 /* Hide fixed dino when viewport is too narrow for side placement */
 @media (max-width: 980px) {
     .dino-neck { display: none; }

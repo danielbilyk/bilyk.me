@@ -405,6 +405,9 @@ class ProjectsManager {
 
         // Update active state on project items
         this.updateActiveProjectItem(project.id);
+        
+        // Add class to body to trigger dino hiding
+        document.body.classList.add('project-viewing');
 
         // Ensure sticky offset reflects current scroll position
         this.updateStickyTopOffset();
@@ -649,6 +652,9 @@ class ProjectsManager {
             // Clear active states
             this.updateActiveProjectItem(null);
             this.state.currentProject = null;
+            
+            // Remove class from body to show dino again
+            document.body.classList.remove('project-viewing');
         } catch (error) {
             console.error('Error hiding project:', error);
         }
