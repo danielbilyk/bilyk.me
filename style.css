@@ -918,10 +918,10 @@ footer.fade-in {
 
 /* Desktop: ensure project detail is visible */
 @media (min-width: 769px) {
-    /* Desktop: make detail panel sticky with dynamic top offset */
+    /* Desktop: make detail panel sticky */
     .projects-page .project-content {
         position: sticky;
-        top: var(--project-sticky-top, 0px);
+        top: 20px;
     }
 
     .project-detail {
