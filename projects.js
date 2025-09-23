@@ -17,7 +17,7 @@ const PROJECTS_DATA = [
         title: 'Transponster',
         year: '2025',
         summary: 'Speech-to-text as easy as it can get in Slack.',
-        description: 'Open Slack, paste the audio, get the transcript. It doesn\'t get any simpler.<br><br>The editorial room cannot function without transcribing speech to text. Interview recordings, podcast recordings, YouTube/TikTok subtitles — you name it.<br><br>To optimise for the simplest way to do it, I built a Slack bot on the ElevenLabs API. Drop in any audio or video file and it shoots back a polished transcript — both as a text file and a share-ready Google Doc. Supports SRT files for YouTube transcriptions, too.',
+        description: '<b>The problem:</b> The editorial room cannot function without transcribing speech to text. Interview recordings, podcast recordings, YouTube/TikTok subtitles — you name it.<br><br>To optimise for the simplest way to do it, I built a Slack bot on the ElevenLabs API. Drop in any audio or video file and it shoots back a polished transcript — both as a text file and a share-ready Google Doc. Supports SRT files for YouTube transcriptions, too.',
         image: 'https://github.com/danielbilyk/Transponster/blob/main/local/Transponster.png?raw=true',
         link: 'https://github.com/danielbilyk/Transponster'
     },
@@ -26,17 +26,17 @@ const PROJECTS_DATA = [
         title: 'Hot Pie Miami',
         year: '2025',
         summary: 'An open-world <i>GTA: Vice City</i> helicopter mission with extra steps.',
-        description: 'Go to Bavarian Alps. Queue <i>Hotline Miami</i> soundtrack. Go airborne with a car. Touch the ground with the heli.<br><br>During one the visits of my good friend Pi, we just could not stop playing <i>Hotline Miami</i>. When it came time to celebrate his Birthday, I remembered that I always wanted make him pass the <i>Vice City</i> helicopter mission in real life.<br><br>We decided to combine both games for the screenplay, and created a quest, driven by a Telegram bot, telling Pi what to do. Pie had to pass a shooting mission, a car-driving mission, and a helicopter mission to earn his present. All whilst we were wearing custom-made merch, and playing <i>Hotline Miami</i> OST on the backgrond.',
+        description: '<b>The mission:</b> Go airborne with a car. Touch the ground with the helicopter.<br><br>Inspired by <i>Hotline Miami</i> and <i>GTA: Vice City</i>, we made a bot to make a Birthday quest for our friend. The quest involved turning Bavarian Alps into a scene for a Nerf-gunshooting challenge, a high-speed driving course, and even a real-life version of the infamous <i>Vice City</i> helicopter mission.',
         image: '/projects/hot-pie.gif',
         link: null
     },
     {
-        id: 'princess',
-        title: 'Gauz\'s 27th',
+        id: 'princess-27',
+        title: 'In Brussels',
         year: '2025',
         summary: 'How the Princess went to Belgium.',
-        description: 'Gather people from three cities, and go to the fourth.<br><br>To celebrate Princess\'s 27th, we had to make a little website for him to know what to pack. Once Princess has packed, he was told to arrive to the train station, where he was met by the girlfriend, and his best friend. <br><br>He thought, Munich is the place where he went. It wasn\'t, though, since all of us tookhim to Brussels to drink some beer.',
-        image: '/projects/princess.jpg',
+        description: '<b>The challenge:</b> Get a friend to a surprise party in another country without him knowing.<br><br>We orchestrated a multi-city meetup, creating a fake website to convince him he was packing for Munich. After meeting the Princess at the train station in Munich, the final reveal was a train ticket not to Germany, but to Brussels for a weekend of Belgian beer.',
+        image: '/projects/princess-27.jpg',
         link: null
     },
     {
@@ -44,8 +44,8 @@ const PROJECTS_DATA = [
         title: 'Редакційний подкаст',
         subtitle: 'Editorial Podcast',
         year: '2024',
-        summary: 'A cozy little place in the editorial room of The Ukrainians Media.',
-        description: 'Why does Christmas always win? What are adults afraid of? What\'s the art of spending more than you earn?<br><br>For 25 episodes, we talked to each other — as well as the friends of <i>The Ukrainians Media</i> about matters unrelated to work.',
+        summary: 'A cozy little place in the editorial room.',
+        description: 'Why does Christmas always win? What are adults afraid of? Where\'s art in spending more than you earn?<br><br>For 25 episodes, we talked to each other — as well as the friends of the editorial room about matters unrelated to work.<br><br><i>Редакційний подкаст</i> is a podcast by <i>The Ukrainians Media</i>.',
         image: '/projects/editorial.jpg',
         link: 'https://editorial-podcast.castos.com/'
     },    
@@ -55,7 +55,7 @@ const PROJECTS_DATA = [
         subtitle: 'Book Cover',
         year: '2024',
         summary: 'What\'s to like about books we disliked at school?',
-        description: 'Together with people who thoroughly read for a living, we revised 10 books from the school curriculum whose point we might not have gotten back then.',
+        description: 'Together with people who thoroughly read for a living, we revised 10 books from the school curriculum whose point we might not have gotten back then.<br><br><i>Палітурка</i> is a podcast by <i>The Ukrainians Media</i> and <a href="https://pen.org.ua/en" class="hover-link">PEN Ukraine</a>.',
         image: '/projects/paliturka.jpg',
         link: 'https://paliturka.castos.com/'
     },
@@ -63,17 +63,17 @@ const PROJECTS_DATA = [
         id: 'covering-ukraine',
         title: 'Covering Ukraine',
         year: '2023',
-        summary: 'A series of narrative audio diaries from European journalists trying to make sense of the war in Ukraine.',
-        description: 'Together with people who thoroughly read for a living, we revised 10 books from the school curriculum whose point we might not have gotten back then.',
+        summary: 'Make war in Ukraine make more sense to European journalists.',
+        description: 'A series of narrative audio diaries from European journalists trying to make sense of the war in Ukraine.<br><br><i>Covering Ukraine</i> is a podcast produced by The Europe-Ukraine Desk, a project by <a href="https://www.n-ost.de/en/" class="hover-link">n-ost</a> and funded by the European Commission.',
         image: '/projects/covering-ukraine.jpg',
         link: 'https://shows.acast.com/6527db7bb774f700116a5c24'
     },    
     {
-        id: 'princess-27',
-        title: 'Gauz\'s 25th',
+        id: 'princess-25',
+        title: 'Nürnbait',
         year: '2023',
         summary: 'How to make your best friend follow you to Nürnberg.',
-        description: 'This is a more detailed description of the second project. You can describe the challenges you faced, the solutions you implemented, and the results you achieved.',
+        description: '<b>The setup:</b> Convince Gauz that the whole birthday weekend is happening in Nürnberg.<br><br>Then, give him, his girlfriend, and his best friend two tickets to Tenerife for two weeks — and let him figure out the vacation situation.',
         image: '/projects/princess-25.jpg',
         link: null
     },    
@@ -82,8 +82,8 @@ const PROJECTS_DATA = [
         title: 'Ніжний інгліш',
         subtitle: 'Tender English',
         year: '2023',
-        summary: 'Probably the only podcast in the world that has an English-talking dog.',
-        description: 'Ten episodes on how to build a healthy relationship with the English language.',
+        summary: 'Let English speak to you.',
+        description: '<b>The challenge:</b> Learn English language.<br><br>Ten episode podcast series on how to build a healthy relationship with the English language. Probably the only podcast in the world that has an English-talking dog.<br><br><i>Ніжний інгліш</i> is a podcast by <i>The Ukrainians Media</i>.',
         image: '/projects/tender.jpg',
         link: 'https://creators.spotify.com/pod/profile/tender-english/'
     },
@@ -92,16 +92,16 @@ const PROJECTS_DATA = [
         title: 'Pie\'s 22nd',
         year: '2022',
         summary: 'How to have a 6-way Nerf-gun fight in the middle of Munich to kidnap a friend.',
-        description: 'One bot, two pots of borscht, three gifts, four side quests, five dozen Red Bulls, six side-side quests, seven days of sleepless hell, and eight people.',
-        image: '/projects/yevhen-24.jpg',
+        description: 'A Telegram bot guided Pie through a chill Munich day; then a six-way Nerf ambush “kidnapped” him, hooded with a custom smooth-cotton violet bag with a straw slit, and driven to the airport for a surprise Barcelona vacation with his girlfriend.',
+        image: '/projects/pie-22.jpg',
         link: null
     },    
     {
         id: 'yevhen-24',
-        title: 'Yevhen\'s 24th',
+        title: 'Hello, Goodbye',
         year: '2021',
-        summary: 'How to combine a Birthday party and a farewell trip with 1 Telegram bot and 8 hours of walking around Munich.',
-        description: 'One bot, two pots of borscht, three gifts, four side quests, five dozen Red Bulls, six side-side quests, seven days of sleepless hell, and eight people.',
+        summary: 'Eight people, seven sleepless nights, six side-side quests, five dozen Red Bulls, four side quests, three presents, two pots of Borscht, one Birthday boy.',
+        description: '<b>The challenge:</b> Merge a birthday party with a farewell trip for a dear friend.<br><br>We spent a week crafting a Telegram city game: side quests, side-side quests, useful NPCs and game currency to buy a Birthday soup.<br><br>The finale: Rooftop finish, iPod he wanted for a long time. We didn\'t know why he said, "Goodbye", we said, "Hello."',
         image: '/projects/yevhen-24.jpg',
         link: null
     },
@@ -110,7 +110,7 @@ const PROJECTS_DATA = [
         title: 'Yevhen\'s 23rd',
         year: '2020',
         summary: 'How to give a friend a break from COVID for his birthday.',
-        description: 'One bot, two days, three friends.<br><br>Because of COVID lockdowns, we couldn\'t attend the Sum-41 concert we had tickets for. In September, Europe still could travel before the second lockdown wave, so we decided to surprise our friend with a birthday trip instead. To keep it secret, we created a Telegram bot that would lure him out of his apartment with a quiz, then guide him to meet us next to a rented MINI for a road trip to Italy.',
+        description: 'One bot, two days, three friends.<br><br>Lockdowns killed our Sum 41 concert, but September travel within Europe was still possible. We built a Telegram bot to keep it secret: a quiz lured him out, then guided him to us beside a rented MINI for a road trip to Italy.',
         image: '/projects/yevhen-1.png',
         link: null
     }
