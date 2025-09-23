@@ -41,7 +41,8 @@ const PROJECTS_DATA = [
     },
     {
         id: 'editorial',
-        title: 'Редакційний подкаст (Editorial Podcast)',
+        title: 'Редакційний подкаст',
+        subtitle: 'Editorial Podcast',
         year: '2024',
         summary: 'A cozy little place in the editorial room of The Ukrainians Media.',
         description: 'Why does Christmas always win? What are adults afraid of? What\'s the art of spending more than you earn?<br><br>For 25 episodes, we talked to each other — as well as the friends of <i>The Ukrainians Media</i> about matters unrelated to work.',
@@ -50,7 +51,8 @@ const PROJECTS_DATA = [
     },    
     {
         id: 'paliturka',
-        title: 'Палітурка (Book Cover)',
+        title: 'Палітурка',
+        subtitle: 'Book Cover',
         year: '2024',
         summary: 'What\'s to like about books we disliked at school?',
         description: 'Together with people who thoroughly read for a living, we revised 10 books from the school curriculum whose point we might not have gotten back then.',
@@ -77,7 +79,8 @@ const PROJECTS_DATA = [
     },    
     {
         id: 'tender',
-        title: 'Ніжний інгліш (Tender English)',
+        title: 'Ніжний інгліш',
+        subtitle: 'Tender English',
         year: '2023',
         summary: 'Probably the only podcast in the world that has an English-talking dog.',
         description: 'Ten episodes on how to build a healthy relationship with the English language.',
@@ -351,8 +354,12 @@ class ProjectsManager {
             projectEl.setAttribute('aria-label', `View ${project.title} project details`);
             
             // Sanitize content to prevent XSS
+            const titleWithSubtitle = project.subtitle 
+                ? `${this.escapeHtml(project.title)} (${this.escapeHtml(project.subtitle)})`
+                : this.escapeHtml(project.title);
+            
             projectEl.innerHTML = `
-                <div class="project-title">${this.escapeHtml(project.title)}</div>
+                <div class="project-title">${titleWithSubtitle}</div>
                 <div class="project-year">${this.escapeHtml(project.year)}</div>
                 <div class="project-summary">${this.sanitizeHtml(project.summary)}</div>
             `;
@@ -542,6 +549,17 @@ class ProjectsManager {
                 this.loadImageSmoothly(overlayImg, project.image, project.title, () => {
                     if (overlayTitle) {
                         overlayTitle.textContent = project.title;
+                    }
+                    
+                    // Handle subtitle
+                    const overlaySubtitle = document.getElementById('overlay-project-subtitle');
+                    if (overlaySubtitle) {
+                        if (project.subtitle) {
+                            overlaySubtitle.textContent = project.subtitle;
+                            overlaySubtitle.style.display = 'block';
+                        } else {
+                            overlaySubtitle.style.display = 'none';
+                        }
                     }
 
                     if (overlayDescription) {
