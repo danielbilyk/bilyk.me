@@ -139,8 +139,173 @@ window.addEventListener('load', () => {
         }
     }
 
-    // Start the process
+    // Start parsing Wisdoms
     if (dino) {
         waitForFooterAndImage();
     }
+
+    let allQuotes = [];
+    let isLoading = false;
+    
+    function renderMarkdown(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/_(.*?)_/g, '<em>$1</em>');
+    }
+    
+    function parseWisdomContent(content) {
+        const wisdomQuotes = [];
+        const lines = content.split('\n');
+        
+        let startParsing = false;
+        for (const line of lines) {
+            if (line.includes('## The Wisdom So Far')) {
+                startParsing = true;
+                continue;
+            }
+            
+            if (startParsing && line.includes('----')) {
+                break;
+            }
+            
+            if (startParsing && line.trim().startsWith('- ') && 
+                !line.includes('<!--') && !line.includes('<hr id=')) {
+                const quote = line.substring(2).trim();
+                if (quote.length > 0) {
+                    wisdomQuotes.push({
+                        text: quote,
+                        source: 'The Wisdom Project',
+                        link: 'https://github.com/merlinmann/wisdom/blob/master/wisdom.md'
+                    });
+                }
+            }
+        }
+        
+        return wisdomQuotes;
+    }
+    
+    // Load quotes from both sources
+    async function loadQuotes() {
+        if (isLoading || allQuotes.length > 0) return;
+        isLoading = true;
+        
+        try {
+            // Load talking points
+            const talkingPointsResponse = await fetch('/talking-points.json');
+            if (talkingPointsResponse.ok) {
+                const talkingPointsData = await talkingPointsResponse.json();
+                talkingPointsData.projects.forEach(project => {
+                    project.points.forEach(point => {
+                        allQuotes.push({
+                            text: point,
+                            source: project.name,
+                            link: project.link
+                        });
+                    });
+                });
+            }
+            
+            // Load wisdom quotes
+            const wisdomResponse = await fetch('https://raw.githubusercontent.com/merlinmann/wisdom/refs/heads/master/wisdom.md');
+            if (wisdomResponse.ok) {
+                const wisdomContent = await wisdomResponse.text();
+                const wisdomQuotes = parseWisdomContent(wisdomContent);
+                allQuotes.push(...wisdomQuotes);
+            }
+        } catch (error) {
+            console.log('Could not load all quote sources:', error);
+        }
+        
+        isLoading = false;
+    }
+    
+    // Create and position tooltip
+    function showTooltip(clickEvent, quote) {
+        // Remove any existing tooltip
+        const existingTooltip = document.querySelector('.dino-tooltip');
+        if (existingTooltip) {
+            existingTooltip.remove();
+        }
+        
+        // Create tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.className = 'dino-tooltip';
+        
+        const quoteText = document.createElement('div');
+        quoteText.className = 'quote-text';
+        quoteText.innerHTML = renderMarkdown(quote.text);
+        
+        const quoteSource = document.createElement('p');
+        quoteSource.className = 'quote-source';
+        quoteSource.innerHTML = `<a href="${quote.link}" target="_blank" rel="noopener">${quote.source}</a>`;
+        
+        tooltip.appendChild(quoteText);
+        tooltip.appendChild(quoteSource);
+        document.body.appendChild(tooltip);
+        
+        // Position tooltip
+        const rect = clickEvent.target.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        // Calculate position (always center below the dino)
+        let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+        let top = rect.bottom + 16;
+        
+        // Ensure tooltip stays within viewport horizontally
+        const padding = 16;
+        left = Math.max(padding, Math.min(left, window.innerWidth - tooltipRect.width - padding));
+        
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+        
+        // Show tooltip with animation
+        requestAnimationFrame(() => {
+            tooltip.classList.add('show');
+        });
+        
+        // Hide tooltip on click elsewhere
+        const hideTooltip = (event) => {
+            if (!tooltip.contains(event.target) && event.target !== clickEvent.target) {
+                tooltip.classList.remove('show');
+                setTimeout(() => {
+                    if (tooltip.parentNode) {
+                        tooltip.remove();
+                    }
+                }, 300);
+                document.removeEventListener('click', hideTooltip);
+            }
+        };
+        
+        setTimeout(() => {
+            document.addEventListener('click', hideTooltip);
+        }, 100);
+    }
+    
+    // Add click handlers to dino images
+    const dinoImages = document.querySelectorAll('.dino-userpic');
+    dinoImages.forEach(dinoImg => {
+        dinoImg.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            
+            // Load quotes if not already loaded
+            await loadQuotes();
+            
+            if (allQuotes.length === 0) {
+                showTooltip(event, {
+                    text: "Crocodiles walk whilst lying down.",
+                    source: "Dino",
+                    link: "#"
+                });
+                return;
+            }
+            
+            // Get random quote
+            const randomQuote = allQuotes[Math.floor(Math.random() * allQuotes.length)];
+            showTooltip(event, randomQuote);
+        });
+    });
+    
+    // Preload quotes when page loads
+    loadQuotes();
 });

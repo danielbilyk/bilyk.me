@@ -398,33 +398,11 @@ footer.fade-in {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px solid #38694B;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.hover-link::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 4px);
-    background-color: rgba(229, 243, 253, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 6px;
-    opacity: 0;
-    z-index: -1;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
 }
 
 .hover-link:hover {
-    border-bottom: none;
-    transform: translateY(-1px);
-}
-
-.hover-link:hover::before {
-    opacity: 1;
+    color: var(--text-primary);
 }
 
 /* Two-column layout for say-hi page */
@@ -1065,4 +1043,108 @@ footer.fade-in {
         font-size: 0.8rem;
     }
     
+}
+
+/* Speaking Dino Tooltip/Tulip */
+.dino-userpic {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.dino-userpic:hover {
+    transform: scale(1.05);
+}
+
+.dino-tooltip {
+    position: absolute;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: 
+        0 5px 12px rgba(0, 0, 0, 0.05),
+        0 2px 5px rgba(0, 0, 0, 0.025),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    max-width: 320px;
+    min-width: 200px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.dino-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dino-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #e5e5e5;
+}
+
+.dino-tooltip::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+}
+
+.dino-tooltip .quote-text {
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.dino-tooltip .quote-text em {
+    font-style: italic;
+    color: var(--text-primary);
+}
+
+.dino-tooltip .quote-text strong {
+    font-weight: 600;
+}
+
+.dino-tooltip .quote-source {
+    margin: 0;
+    text-align: right;
+}
+
+.dino-tooltip .quote-source a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    border-bottom: 1px solid #38694B;
+}
+
+.dino-tooltip .quote-source a:hover {
+    color: var(--text-primary);
+}
+
+/* Responsive tooltip positioning */
+@media (max-width: 768px) {
+    .dino-tooltip {
+        max-width: 280px;
+        font-size: 13px;
+        padding: 14px 16px;
+    }
 }
