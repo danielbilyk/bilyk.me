@@ -165,7 +165,7 @@ window.addEventListener('load', () => {
                 continue;
             }
             
-            if (startParsing && line.includes('----')) {
+            if (startParsing && line.includes('## Works Cited')) {
                 break;
             }
             
@@ -182,7 +182,12 @@ window.addEventListener('load', () => {
             }
         }
         
-        return wisdomQuotes;
+        // Remove duplicates based on text content
+        const uniqueWisdomQuotes = wisdomQuotes.filter((quote, index, array) => 
+            array.findIndex(q => q.text === quote.text) === index
+        );
+        
+        return uniqueWisdomQuotes;
     }
     
     // Load quotes from both sources

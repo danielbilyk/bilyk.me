@@ -1129,7 +1129,7 @@ footer.fade-in {
 }
 
 .dino-tooltip .quote-source a {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
