@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     // --- Header Pill Navigation ---
     const pillContainers = document.querySelectorAll('.pill-container');
 
