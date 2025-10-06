@@ -64,6 +64,8 @@ class ProjectsManager {
             this.updateViewportState();
             this.setupEventListeners();
             this.renderProjects();
+            // Attempt to replace embedded data with external JSON, then re-render
+            this.loadProjectsFromJson();
             this.preloadImages();
             this.state.isInitialized = true;
             
@@ -71,6 +73,42 @@ class ProjectsManager {
         } catch (error) {
             console.error('Failed to initialize ProjectsManager:', error);
             this.showErrorState();
+        }
+    }
+
+    /**
+     * Load projects from external JSON file with graceful fallback
+     */
+    async loadProjectsFromJson() {
+        try {
+            const response = await fetch('/projects.json', { cache: 'no-cache' });
+            if (!response.ok) return; // keep fallback
+            const data = await response.json();
+            if (!Array.isArray(data)) return; // invalid shape, keep fallback
+
+            // Basic normalization to ensure required fields exist
+            const normalized = data
+                .filter(p => p && typeof p === 'object' && p.id && p.title)
+                .map(p => ({
+                    id: String(p.id),
+                    title: String(p.title),
+                    subtitle: p.subtitle ? String(p.subtitle) : undefined,
+                    year: p.year ? String(p.year) : '',
+                    summary: p.summary ? String(p.summary) : '',
+                    description: p.description ? String(p.description) : '',
+                    image: p.image ? String(p.image) : '',
+                    link: p.link || null
+                }));
+
+            if (normalized.length === 0) return;
+
+            this.state.projects = normalized;
+            this.renderProjects();
+            this.preloadImages();
+            console.log('Loaded projects from projects.json');
+        } catch (e) {
+            // Non-fatal: fall back to embedded data
+            console.debug('Could not load projects.json; using embedded data');
         }
     }
 
