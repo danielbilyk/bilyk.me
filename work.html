@@ -41,84 +41,179 @@
         </header>
 
         <main class="fade-in cv-page">
-            <div class="hero">
-                <h1>I build bridges between people and technology.</h1>
-                <p class="subtitle">
-                    I’m a Product Manager driven by a deep-seated curiosity to make things better. I thrive on turning messy, complex problems into simple, elegant solutions that people genuinely love using. My background sits right at the intersection of tech and humanity; I can talk APIs and system design with engineers, then translate that into a clear, user-centric vision for everyone else.
-                </p>
+            <section class="hero-cv">
+                <div class="hero-cv-image">
+                    <img src="static/cv-photo.jpg" alt="Daniel Bilyk" class="cv-photo">
+                    <img src="static/cv-second-photo.jpg" alt="Daniel Bilyk" class="cv-photo-hover">
+                </div>
+                <div class="hero-cv-text">
+                    <h1>Daniel Bilyk</h1>
+                    <p class="subtitle">
+                        As product manager, I specialize in translating deep user empathy into technically robust solutions. I enjoy diving into the details of both the user's problem and the engineering required to solve it, ensuring we build products that are both loved and reliable.
+                    </p>
+                </div>
+            </section>
+
+            <section class="connect-section">
+                <div class="connect-grid">
+                    <div class="connect-column">
+                        <h3>Contact</h3>
+                        <div class="contact-list">
+                            <a href="mailto:hey@bilyk.me" class="contact-item">
+                                <div class="contact-icon">
+                                    <img src="/static/contact/email-logo.svg" alt="Email" class="icon-mono">
+                                    <img src="/static/contact/email-logo-color.svg" alt="Email" class="icon-color">
+                                </div>
+                                <span class="contact-name">hey@bilyk.me</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/danielbilyk/" target="_blank" rel="noopener" class="contact-item">
+                                <div class="contact-icon">
+                                    <img src="/static/contact/linkedin-logo.png" alt="LinkedIn" class="icon-mono">
+                                    <img src="/static/contact/linkedin-logo-color.png" alt="LinkedIn" class="icon-color">
+                                </div>
+                                <span class="contact-name">LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/danielbilyk" target="_blank" rel="noopener" class="contact-item">
+                                <div class="contact-icon">
+                                    <img src="/static/contact/github-logo.png" alt="GitHub" class="icon-mono">
+                                    <img src="/static/contact/github-logo.png" alt="GitHub" class="icon-color">
+                                </div>
+                                <span class="contact-name">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="connect-column">
+                        <h3>Fluent in</h3>
+                        <div class="language-list">
+                            <p>Ukrainian</p>
+                            <p>German</p>
+                            <p>English</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cv-toggle">
+                <button id="short-cv-btn" class="cv-toggle-btn active">Short Version</button>
+                <button id="long-cv-btn" class="cv-toggle-btn">Long Version</button>
             </div>
 
-            <section class="timeline">
-                <h2>Experience</h2>
-                <div class="timeline-item">
-                    <h3>Product Manager</h3>
-                    <p class="sub-info">Veact GmbH | Oct 2024 - Present</p>
-                    <ul>
-                        <li>Promoted to Product Manager, leading the strategic migration of a complex B2B SaaS platform by owning the development and communication for multiple core modules.</li>
-                        <li>Pioneered the integration of product analytics into the development lifecycle, establishing a data-informed culture where KPIs are used alongside qualitative feedback to drive decision-making.</li>
-                        <li>Act as the UI/UX gatekeeper across multiple agile teams, ensuring a cohesive and high-quality user experience for all new platform developments.</li>
-                        <li>Drive cross-functional alignment by leading workshops and managing all internal and external communications for product rollouts.</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h3>Junior Product Manager</h3>
-                    <p class="sub-info">Veact GmbH | May 2023 - Oct 2024</p>
-                    <ul>
-                        <li>Led a dedicated development team to migrate functionalities to a new SaaS platform, owning the full product lifecycle from backlog to stakeholder alignment.</li>
-                        <li>Led the end-to-end development of the Customer Hub, a foundational module that delivered a vastly more intuitive and comprehensive data view for users.</li>
-                        <li>Designed and delivered a suite of public REST APIs for internal products, accelerating development for other teams.</li>
-                        <li>Championed a complete overhaul of the product localization process, establishing new quality standards that significantly improved the user experience.</li>
-                        <li>Spearheaded an ambitious project to redesign a complex workflow. The experience was invaluable, cementing my commitment to rigorous assumption validation and shipping smaller, high-impact MVPs.</li>
-                    </ul>
-                </div>
-                 <div class="timeline-item">
-                    <h3>Product Specialist (Full-Time)</h3>
-                    <p class="sub-info">Veact GmbH | Oct 2022 - May 2023</p>
-                    <ul>
-                        <li>Managed the end-to-end product cycle for a new landing page module, writing requirements, leading daily collaboration with development, and planning the rollout.</li>
-                        <li>Influenced the technical direction by selecting Tailwind CSS for the new module and co-trained the marketing team on its use.</li>
-                        <li>Assumed full product ownership for the company's core emailing platform, managing all related bugs and feature requests.</li>
-                        <li>Conceived and launched the "Update Journal," a company-wide internal changelog that significantly improved cross-team communication.</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h3>Product Specialist (Working Student)</h3>
-                    <p class="sub-info">Veact GmbH | May 2021 - Oct 2022</p>
-                    <ul>
-                        <li>Took full ownership of the company's Jira instance, architecting and automating workflows for bug reporting and ticket creation.</li>
-                        <li>Authored and maintained a comprehensive internal knowledge base in Confluence, creating a lasting source of truth for product processes.</li>
-                        <li>Contributed to key product initiatives, including the rollout of 2FA and a re-implementation of the email unsubscription system.</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h3>Working Student in Dealer Operations</h3>
-                    <p class="sub-info">Veact GmbH | Jun 2018 - May 2021</p>
-                    <ul>
-                        <li>Co-owned the end-to-end execution of a marketing operations pipeline, delivering ~10,000 personalized communications monthly.</li>
-                        <li>Identified a critical lack of transparency in the campaign workflow and implemented a centralized tracking system that remains in use years later.</li>
-                        <li>Served as the central communication hub between stakeholders, ensuring the smooth handoff of data and assets.</li>
-                    </ul>
-                </div>
-            </section>
+            <div id="cv-content">
+                <section id="short-cv" class="cv-version">
+                    <a href="/Daniel Bilyk.md" class="download-cv-btn">Download CV as PDF</a>
 
-            <section class="timeline">
-                <h2>Education</h2>
-                <div class="timeline-item">
-                    <h3>Technical University of Munich</h3>
-                    <p class="sub-info">Bachelor of Science, Political Science and Government | Oct 2017 - Sep 2022</p>
-                    <p>Deliberately chose to study political science at a leading technical university to specialize in the intersection of technology, policy, and society. Culminated in a thesis assessing the impact of the EU's Digital Markets Act (DMA) on Apple's core platform services.</p>
-                </div>
-                 <div class="timeline-item">
-                    <h3>Studienkolleg bei den Universitäten des Freistaates Bayern</h3>
-                    <p class="sub-info">Economics | Feb 2016 - Feb 2017</p>
-                    <p>Completed an intensive preparatory year to transition from a technical engineering background to business studies, discovering a passion for analytical frameworks through the study of legal cases.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>National University «Kyiv Aviation Institute»</h3>
-                    <p class="sub-info">Aircraft Maintenance | Sep 2014 - Feb 2016</p>
-                    <p>Developed a foundational understanding of complex systems through engineering coursework. Volunteered at the National Aviation Museum, translating intricate technical concepts for a general audience.</p>
-                </div>
-            </section>
+                    <div class="cv-section">
+                        <h2>Experience</h2>
+                        <div class="cv-item">
+                            <h4>Product Manager, Veact GmbH</h4>
+                            <p class="sub-info">Remote | May 2023 – Present</p>
+                            <p>As Product Owner for a core B2B SaaS platform, I manage the full product lifecycle for multiple development teams, from discovery and roadmap definition to launch and iteration. I led the end-to-end delivery of the 'Customer Hub,' a backend-heavy foundational module, translating user needs into a more intuitive data view. I also designed and shipped a suite of public REST APIs to accelerate internal development. By pioneering the integration of product analytics, I helped establish a data-informed culture where we track key metrics to drive iterative improvements.</p>
+                        </div>
+                        <div class="cv-item">
+                            <h4>Product Specialist, Veact GmbH</h4>
+                            <p class="sub-info">Munich, Germany | May 2021 – May 2023</p>
+                            <p>I owned the delivery of a new landing page module, translating business needs and user feedback into actionable requirements for the engineering team. Collaborating closely with design and development, I managed the product backlog and ensured we shipped features that delivered real customer value. I also improved our internal processes by overhauling our Jira instance and creating a comprehensive knowledge base in Confluence to align teams.</p>
+                        </div>
+                        <div class="cv-item">
+                            <h4>Working Student in Operations, Veact GmbH</h4>
+                            <p class="sub-info">Munich, Germany | Jun 2018 – May 2021</p>
+                            <p>I co-managed a marketing operations pipeline, ensuring the timely delivery of ~10,000 personalized communications monthly. I identified a critical workflow bottleneck and drove the implementation of a centralized tracking system to improve transparency and outcomes. In this role, I served as the communication hub, aligning multiple stakeholders to ensure smooth data and asset handoffs.</p>
+                        </div>
+                        <div class="cv-item">
+                            <h4>Freelance Producer & Internal Tool-Maker, The Ukrainians Media</h4>
+                            <p class="sub-info">Remote | 2022 – Present</p>
+                            <p>I initially joined as a freelance producer for several of the media's podcasts. My role quickly expanded to solving operational challenges, where I developed internal tools and automations (e.g., Slack agents) to streamline editorial workflows. I also managed audio engineering and content distribution.</p>
+                        </div>
+                    </div>
+                    <div class="cv-section">
+                        <h2>Education</h2>
+                        <div class="cv-item">
+                            <h4>Technical University of Munich</h4>
+                            <p class="sub-info">B.Sc. Political Science | 2017 – 2022</p>
+                            <p>I deliberately chose to study political science at a leading technical university to specialize in the intersection of technology, policy, and society. My thesis assessed the impact of the EU's Digital Markets Act (DMA) on Apple's core platform services.</p>
+                        </div>
+                        <div class="cv-item">
+                            <h4>National University «Kyiv Aviation Institute»</h4>
+                            <p class="sub-info">Aircraft Maintenance | 2014 – 2016</p>
+                            <p>Through my engineering coursework, I developed a foundational understanding of complex systems. I also volunteered at the National Aviation Museum, where I learned to translate intricate technical concepts for a general audience.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="long-cv" class="cv-version" style="display: none;">
+                    <section class="timeline">
+                        <h2>Experience</h2>
+                        <div class="timeline-item">
+                            <h3>Product Manager</h3>
+                            <p class="sub-info">Veact GmbH | Oct 2024 - Present</p>
+                            <ul>
+                                <li>Promoted to Product Manager, leading the strategic migration of a complex B2B SaaS platform by owning the development and communication for multiple core modules.</li>
+                                <li>Pioneered the integration of product analytics into the development lifecycle, establishing a data-informed culture where KPIs are used alongside qualitative feedback to drive decision-making.</li>
+                                <li>Act as the UI/UX gatekeeper across multiple agile teams, ensuring a cohesive and high-quality user experience for all new platform developments.</li>
+                                <li>Drive cross-functional alignment by leading workshops and managing all internal and external communications for product rollouts.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Junior Product Manager</h3>
+                            <p class="sub-info">Veact GmbH | May 2023 - Oct 2024</p>
+                            <ul>
+                                <li>Led a dedicated development team to migrate functionalities to a new SaaS platform, owning the full product lifecycle from backlog to stakeholder alignment.</li>
+                                <li>Led the end-to-end development of the Customer Hub, a foundational module that delivered a vastly more intuitive and comprehensive data view for users.</li>
+                                <li>Designed and delivered a suite of public REST APIs for internal products, accelerating development for other teams.</li>
+                                <li>Championed a complete overhaul of the product localization process, establishing new quality standards that significantly improved the user experience.</li>
+                                <li>Spearheaded an ambitious project to redesign a complex workflow. The experience was invaluable, cementing my commitment to rigorous assumption validation and shipping smaller, high-impact MVPs.</li>
+                            </ul>
+                        </div>
+                         <div class="timeline-item">
+                            <h3>Product Specialist (Full-Time)</h3>
+                            <p class="sub-info">Veact GmbH | Oct 2022 - May 2023</p>
+                            <ul>
+                                <li>Managed the end-to-end product cycle for a new landing page module, writing requirements, leading daily collaboration with development, and planning the rollout.</li>
+                                <li>Influenced the technical direction by selecting Tailwind CSS for the new module and co-trained the marketing team on its use.</li>
+                                <li>Assumed full product ownership for the company's core emailing platform, managing all related bugs and feature requests.</li>
+                                <li>Conceived and launched the "Update Journal," a company-wide internal changelog that significantly improved cross-team communication.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Product Specialist (Working Student)</h3>
+                            <p class="sub-info">Veact GmbH | May 2021 - Oct 2022</p>
+                            <ul>
+                                <li>Took full ownership of the company's Jira instance, architecting and automating workflows for bug reporting and ticket creation.</li>
+                                <li>Authored and maintained a comprehensive internal knowledge base in Confluence, creating a lasting source of truth for product processes.</li>
+                                <li>Contributed to key product initiatives, including the rollout of 2FA and a re-implementation of the email unsubscription system.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Working Student in Dealer Operations</h3>
+                            <p class="sub-info">Veact GmbH | Jun 2018 - May 2021</p>
+                            <ul>
+                                <li>Co-owned the end-to-end execution of a marketing operations pipeline, delivering ~10,000 personalized communications monthly.</li>
+                                <li>Identified a critical lack of transparency in the campaign workflow and implemented a centralized tracking system that remains in use years later.</li>
+                                <li>Served as the central communication hub between stakeholders, ensuring the smooth handoff of data and assets.</li>
+                            </ul>
+                        </div>
+                    </section>
+        
+                    <section class="timeline">
+                        <h2>Education</h2>
+                        <div class="timeline-item">
+                            <h3>Technical University of Munich</h3>
+                            <p class="sub-info">Bachelor of Science, Political Science and Government | Oct 2017 - Sep 2022</p>
+                            <p>Deliberately chose to study political science at a leading technical university to specialize in the intersection of technology, policy, and society. Culminated in a thesis assessing the impact of the EU's Digital Markets Act (DMA) on Apple's core platform services.</p>
+                        </div>
+                         <div class="timeline-item">
+                            <h3>Studienkolleg bei den Universitäten des Freistaates Bayern</h3>
+                            <p class="sub-info">Economics | Feb 2016 - Feb 2017</p>
+                            <p>Completed an intensive preparatory year to transition from a technical engineering background to business studies, discovering a passion for analytical frameworks through the study of legal cases.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>National University «Kyiv Aviation Institute»</h3>
+                            <p class="sub-info">Aircraft Maintenance | Sep 2014 - Feb 2016</p>
+                            <p>Developed a foundational understanding of complex systems through engineering coursework. Volunteered at the National Aviation Museum, translating intricate technical concepts for a general audience.</p>
+                        </div>
+                    </section>
+                </section>
+            </div>
         </main>
     </div>
 

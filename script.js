@@ -313,4 +313,26 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Preload quotes when page loads
     loadQuotes();
+
+    // --- CV Page Toggle ---
+    const shortCvBtn = document.getElementById('short-cv-btn');
+    const longCvBtn = document.getElementById('long-cv-btn');
+    const shortCv = document.getElementById('short-cv');
+    const longCv = document.getElementById('long-cv');
+
+    if (shortCvBtn && longCvBtn && shortCv && longCv) {
+        shortCvBtn.addEventListener('click', () => {
+            shortCv.style.display = 'block';
+            longCv.style.display = 'none';
+            shortCvBtn.classList.add('active');
+            longCvBtn.classList.remove('active');
+        });
+
+        longCvBtn.addEventListener('click', () => {
+            shortCv.style.display = 'none';
+            longCv.style.display = 'block';
+            longCvBtn.classList.add('active');
+            shortCvBtn.classList.remove('active');
+        });
+    }
 });
