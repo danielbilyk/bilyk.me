@@ -1221,33 +1221,6 @@ footer.fade-in {
     padding: 0.75rem;
 }
 
-.cv-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 3rem 0;
-}
-
-.cv-toggle-btn {
-    background-color: transparent;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.cv-toggle-btn.active {
-    background-color: var(--light-blue);
-    border-color: var(--light-blue);
-    color: var(--text-primary);
-}
-
-.cv-toggle-btn:not(.active):hover {
-    border-color: var(--text-secondary);
-}
 
 .download-cv-btn {
     display: inline-block;
@@ -1294,6 +1267,92 @@ footer.fade-in {
      color: var(--text-secondary);
 }
 
+.cv-item ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-top: 1rem;
+}
+
+.cv-item ul li {
+    margin-bottom: 0.5rem;
+}
+
+.core-skills-section {
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.core-skills-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.skill-category {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.skill-category h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.skill-category ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.skill-category ul li {
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+}
+
+
+.print-footer {
+    display: none;
+}
+
+@media print {
+    body {
+        font-size: 10pt;
+    }
+
+    header, .dino-on-line, .download-cv-btn, .site-footer {
+        display: none;
+    }
+
+    .print-footer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 9pt;
+        color: #666;
+    }
+
+    .core-skills-section, .skills-grid, .skill-category {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-cv {
         flex-direction: column;
@@ -1319,5 +1378,61 @@ footer.fade-in {
 
     .cv-page .connect-section {
         margin-top: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    .skill-category h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
+    }
+    .skill-category ul li {
+        font-size: 0.9375rem;
+        margin-bottom: 0.3rem;
+    }
+}
+
+.connect-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skills-list p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.skills-list strong {
+    color: var(--text-primary);
+}
+
+@media (max-width: 900px) {
+    .connect-grid {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .connect-grid {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .connect-grid {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }
