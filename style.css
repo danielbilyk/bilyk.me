@@ -411,7 +411,6 @@ footer.fade-in {
     justify-content: center;
     gap: 4rem;
     text-align: left;
-    align-items: flex-start;
 }
 
 .connect-column h3 {
@@ -1395,14 +1394,6 @@ footer.fade-in {
     }
 }
 
-.connect-grid {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    text-align: left;
-    align-items: flex-start;
-}
-
 .skills-list {
     display: flex;
     flex-direction: column;
@@ -1416,23 +1407,4 @@ footer.fade-in {
 
 .skills-list strong {
     color: var(--text-primary);
-}
-
-@media (max-width: 900px) {
-    .connect-grid {
-        gap: 3rem;
-    }
-}
-
-@media (max-width: 700px) {
-    .connect-grid {
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 550px) {
-    .connect-grid {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
 }
