@@ -28,6 +28,32 @@
             margin-top: 1rem;
         }
         
+        /* Center the two-column grid on this page only */
+        .connect-grid {
+            grid-template-columns: repeat(2, minmax(200px, 300px));
+            justify-content: center;
+            gap: 3rem;
+        }
+        
+        @media (max-width: 900px) {
+            .connect-grid {
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .connect-grid {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 550px) {
+            .connect-grid {
+                grid-template-columns: repeat(2, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+        }
+        
         .vibe-check-header {
             position: relative;
             display: inline-block;
