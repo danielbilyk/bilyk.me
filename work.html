@@ -9,13 +9,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bilyk.me/work">
     <meta property="og:title" content="Work | Daniel Bilyk">
-    <meta property="og:description" content="Product manager at Veact GmbH building bridges between people and technology.">
+    <meta property="og:description" content="Product manager, podcast producer.">
     <meta property="og:image" content="https://bilyk.me/static/dino-userpic.png">
     
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="https://bilyk.me/work">
     <meta property="twitter:title" content="Work | Daniel Bilyk">
-    <meta property="twitter:description" content="Product manager at Veact GmbH building bridges between people and technology.">
+    <meta property="twitter:description" content="Product manager, podcast producer.">
     <meta property="twitter:image" content="https://bilyk.me/static/dino-userpic.png">
     
     <link rel="stylesheet" href="style.css">
@@ -42,9 +42,9 @@
 
         <main class="fade-in cv-page">
             <section class="hero-cv">
-                <div class="hero-cv-image">
-                    <img src="static/cv-photo.jpeg" alt="Daniel Bilyk" class="cv-photo">
-                    <img src="static/cv-second-photo.jpeg" alt="Daniel Bilyk" class="cv-photo-hover">
+                <div class="hero-cv-image" id="cv-photo-container" role="img" aria-label="Photo of Daniel Bilyk. Hover to see alternate photo.">
+                    <img src="static/cv-photo.jpg" alt="Daniel Bilyk" class="cv-photo" id="cv-photo-main">
+                    <img data-src="static/cv-second-photo.jpg" alt="Daniel Bilyk (alternate)" class="cv-photo-hover" id="cv-photo-hover">
                 </div>
                 <div class="hero-cv-text">
                     <h1>Daniel Bilyk</h1>
@@ -87,19 +87,19 @@
                         <div class="contact-list">
                             <div class="contact-item">
                                 <div class="contact-icon">
-                                    <img src="https://cdn.jsdelivr.net/gh/hatscripts/circle-flags/flags/ua.svg" alt="Ukrainian flag">
+                                    <img src="static/contact/ua-flag.svg" alt="Ukrainian">
                                 </div>
                                 <span class="contact-name">Ukrainian</span>
                             </div>
                             <div class="contact-item">
                                 <div class="contact-icon">
-                                    <img src="https://cdn.jsdelivr.net/gh/hatscripts/circle-flags/flags/de.svg" alt="German flag">
+                                    <img src="static/contact/de-flag.svg" alt="German">
                                 </div>
                                 <span class="contact-name">German</span>
                             </div>
                             <div class="contact-item">
                                 <div class="contact-icon">
-                                    <img src="https://cdn.jsdelivr.net/gh/hatscripts/circle-flags/flags/gb.svg" alt="UK flag for English">
+                                    <img src="static/contact/gb-flag.svg" alt="English">
                                 </div>
                                 <span class="contact-name">English</span>
                             </div>
@@ -140,7 +140,7 @@
                                 <li>Revamped the company's Jira instance by automating workflows for bug reporting and ticket creation, improving team efficiency.</li>
                                 <li>Authored and scaled a comprehensive product knowledge base in Confluence, establishing a single source of truth for internal processes.</li>
                                 <li>Supported the rollout of mandatory 2FA for platform users.</li> 
-                                <li>Drove the and re-implementation of the email unsubscription system.</li>
+                                <li>Drove the re-implementation of the email unsubscription system.</li>
                             </ul>
                         </div>
                         <div class="cv-item">
@@ -177,7 +177,7 @@
             </div>
         </main>
         <div class="print-footer">
-            <p>This is a custom footer for the PDF version.</p>
+            <p>This PDF was automatically created from bilyk.me/work</p>
         </div>
         <img src="static/dino-skating.gif" alt="Dino riding skateboard" class="dino-on-line">
     </div>

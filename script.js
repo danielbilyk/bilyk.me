@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     // --- Header Pill Navigation ---
     const pillContainers = document.querySelectorAll('.pill-container');
 
@@ -15,7 +15,8 @@ window.addEventListener('load', () => {
         }
 
         if (activeLink) {
-            moveIndicator(activeLink);
+            // Small delay allows CSS and fonts to settle before measuring
+            setTimeout(() => moveIndicator(activeLink), 50);
         }
 
         links.forEach(link => {
@@ -313,5 +314,90 @@ window.addEventListener('load', () => {
     
     // Preload quotes when page loads
     loadQuotes();
+
+    // Handle CV photo loading states (work page only)
+    const container = document.getElementById('cv-photo-container');
+    const mainPhoto = document.getElementById('cv-photo-main');
+    const hoverPhoto = document.getElementById('cv-photo-hover');
+    
+    if (container && mainPhoto && hoverPhoto) {
+        let mainLoaded = false;
+        let hoverLoaded = false;
+        let loadTimeout = null;
+        
+        const markAsLoaded = () => {
+            container.classList.add('loaded');
+            if (loadTimeout) clearTimeout(loadTimeout);
+        };
+        
+        const checkBothLoaded = () => {
+            if (mainLoaded && hoverLoaded) {
+                markAsLoaded();
+            }
+        };
+        
+        // Error state: if main photo fails to load within 5 seconds, show error
+        loadTimeout = setTimeout(() => {
+            if (!mainLoaded) {
+                container.classList.add('loaded'); // Stop loading animation
+                console.warn('CV photo loading timeout');
+            }
+        }, 5000);
+        
+        // Handle main photo
+        if (mainPhoto.complete && mainPhoto.naturalHeight !== 0) {
+            mainLoaded = true;
+            checkBothLoaded();
+        } else {
+            mainPhoto.addEventListener('load', () => {
+                mainLoaded = true;
+                checkBothLoaded();
+            });
+            mainPhoto.addEventListener('error', () => {
+                mainLoaded = true; // Treat error as loaded to stop animation
+                checkBothLoaded();
+                console.error('Failed to load main CV photo');
+            });
+        }
+        
+        // Lazy load hover photo on first mouseover or touch
+        let hoverPhotoLoaded = false;
+        const loadHoverPhoto = () => {
+            if (hoverPhotoLoaded) return;
+            hoverPhotoLoaded = true;
+            
+            const dataSrc = hoverPhoto.getAttribute('data-src');
+            if (dataSrc) {
+                hoverPhoto.src = dataSrc;
+                hoverPhoto.removeAttribute('data-src');
+                
+                if (hoverPhoto.complete && hoverPhoto.naturalHeight !== 0) {
+                    hoverLoaded = true;
+                    checkBothLoaded();
+                } else {
+                    hoverPhoto.addEventListener('load', () => {
+                        hoverLoaded = true;
+                        checkBothLoaded();
+                    });
+                    hoverPhoto.addEventListener('error', () => {
+                        hoverLoaded = true; // Treat error as loaded
+                        console.error('Failed to load hover CV photo');
+                    });
+                }
+            }
+        };
+        
+        // Trigger lazy load on hover or touch
+        container.addEventListener('mouseenter', loadHoverPhoto, { once: true });
+        container.addEventListener('touchstart', loadHoverPhoto, { once: true });
+        
+        // For accessibility: also lazy load on focus
+        container.addEventListener('focus', loadHoverPhoto, { once: true });
+        
+        // If main photo loads, consider it "loaded enough" for UX
+        if (mainLoaded) {
+            markAsLoaded();
+        }
+    }
 
 });
