@@ -425,7 +425,7 @@ class ProjectManager {
 
             // Load image first, then sync text and reveal together
             if (projectImg) {
-                this.loadImageSmoothly(projectImg, project.image, project.title, () => {
+                this.loadImageSmoothly(projectImg, project.image, `${project.title} project image`, () => {
                     // Ignore if user already hovered away
                     if (this.state.currentProject !== project.id) return;
 
@@ -487,7 +487,7 @@ class ProjectManager {
 
             // Update overlay content after image is ready
             if (overlayImg) {
-                this.loadImageSmoothly(overlayImg, project.image, project.title, () => {
+                this.loadImageSmoothly(overlayImg, project.image, `${project.title} project image`, () => {
                     if (overlayTitle) {
                         overlayTitle.textContent = project.title;
                     }
@@ -579,7 +579,7 @@ class ProjectManager {
                 // Ensure still the latest request
                 if (imgElement.dataset.requestId !== currentId) return;
                 imgElement.src = cachedImg.src;
-                imgElement.alt = altText || 'Project image';
+                imgElement.alt = altText || 'Project showcase image';
                 // Next frame, fade in
                 requestAnimationFrame(() => {
                     if (imgElement.dataset.requestId !== currentId) return;
@@ -600,7 +600,7 @@ class ProjectManager {
             setTimeout(() => {
                 if (imgElement.dataset.requestId !== currentId) return;
                 imgElement.src = targetSrc;
-                imgElement.alt = altText || 'Project image';
+                imgElement.alt = altText || 'Project showcase image';
                 requestAnimationFrame(() => {
                     if (imgElement.dataset.requestId !== currentId) return;
                     imgElement.style.opacity = '1';
@@ -623,7 +623,7 @@ class ProjectManager {
     setImageSource(imgElement, targetSrc, altText, fallbackSrc) {
         // Kept for backward compatibility; prefer loadImageSmoothly
         imgElement.src = targetSrc || fallbackSrc;
-        imgElement.alt = altText || 'Project image';
+                imgElement.alt = altText || 'Project showcase image';
         imgElement.onerror = () => {
             if (imgElement.src !== fallbackSrc) {
                 imgElement.src = fallbackSrc;
