@@ -321,8 +321,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const hoverPhoto = document.getElementById('cv-photo-hover');
     
     if (container && mainPhoto && hoverPhoto) {
-        let mainLoaded = false;
-        let hoverLoaded = false;
         let loadTimeout = null;
         
         const markAsLoaded = () => {
@@ -330,32 +328,21 @@ window.addEventListener('DOMContentLoaded', () => {
             if (loadTimeout) clearTimeout(loadTimeout);
         };
         
-        const checkBothLoaded = () => {
-            if (mainLoaded && hoverLoaded) {
-                markAsLoaded();
-            }
-        };
-        
         // Error state: if main photo fails to load within 5 seconds, show error
         loadTimeout = setTimeout(() => {
-            if (!mainLoaded) {
-                container.classList.add('loaded'); // Stop loading animation
-                console.warn('CV photo loading timeout');
-            }
+            container.classList.add('loaded'); // Stop loading animation
+            console.warn('CV photo loading timeout');
         }, 5000);
         
-        // Handle main photo
+        // Handle main photo - mark as loaded once it's ready
         if (mainPhoto.complete && mainPhoto.naturalHeight !== 0) {
-            mainLoaded = true;
-            checkBothLoaded();
+            markAsLoaded();
         } else {
             mainPhoto.addEventListener('load', () => {
-                mainLoaded = true;
-                checkBothLoaded();
+                markAsLoaded();
             });
             mainPhoto.addEventListener('error', () => {
-                mainLoaded = true; // Treat error as loaded to stop animation
-                checkBothLoaded();
+                markAsLoaded(); // Stop loading animation even on error
                 console.error('Failed to load main CV photo');
             });
         }
@@ -371,19 +358,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 hoverPhoto.src = dataSrc;
                 hoverPhoto.removeAttribute('data-src');
                 
-                if (hoverPhoto.complete && hoverPhoto.naturalHeight !== 0) {
-                    hoverLoaded = true;
-                    checkBothLoaded();
-                } else {
-                    hoverPhoto.addEventListener('load', () => {
-                        hoverLoaded = true;
-                        checkBothLoaded();
-                    });
-                    hoverPhoto.addEventListener('error', () => {
-                        hoverLoaded = true; // Treat error as loaded
-                        console.error('Failed to load hover CV photo');
-                    });
-                }
+                hoverPhoto.addEventListener('error', () => {
+                    console.error('Failed to load hover CV photo');
+                });
             }
         };
         
@@ -393,11 +370,6 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // For accessibility: also lazy load on focus
         container.addEventListener('focus', loadHoverPhoto, { once: true });
-        
-        // If main photo loads, consider it "loaded enough" for UX
-        if (mainLoaded) {
-            markAsLoaded();
-        }
     }
 
 });
