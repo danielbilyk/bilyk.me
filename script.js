@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     // --- Header Pill Navigation ---
     const pillContainers = document.querySelectorAll('.pill-container');
 
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         if (activeLink) {
-            setTimeout(() => moveIndicator(activeLink), 50);
+            moveIndicator(activeLink);
         }
 
         links.forEach(link => {

@@ -1188,6 +1188,10 @@ footer.fade-in {
     max-width: 100%;
 }
 
+.cv-page .connect-section {
+    margin-bottom: 3rem;
+}
+
 .cv-contact-list {
     display: flex;
     flex-direction: column;
@@ -1417,4 +1421,49 @@ footer.fade-in {
 
 .skills-list strong {
     color: var(--text-primary);
+}
+
+.cv-page .contact-list {
+    gap: 0;
+}
+
+.cv-page .contact-item {
+    padding: 0.5rem;
+    gap: 1rem;
+}
+
+.cv-page .contact-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.cv-page .contact-icon img {
+    width: 24px;
+    height: 24px;
+    position: absolute; /* This was incorrectly set to relative */
+}
+
+/* On CV page, disable hover for language items which are not links */
+.cv-page div.contact-item {
+    cursor: default;
+}
+
+.cv-page div.contact-item:hover {
+    background-color: transparent;
+    transform: none;
+}
+
+.cv-page div.contact-item:hover .contact-icon .icon-mono {
+    opacity: 1;
+}
+
+.cv-page div.contact-item:hover .contact-icon .icon-color {
+    opacity: 0;
+}
+
+/* Desktop-only vertical spacing for contact/language lists */
+@media (min-width: 769px) {
+    .cv-page .contact-list {
+        gap: 0.5rem;
+    }
 }
