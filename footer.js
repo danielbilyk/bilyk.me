@@ -1,4 +1,3 @@
-// Reusable footer component
 function createFooter() {
     return `
         <footer class="site-footer fade-in">
@@ -8,7 +7,6 @@ function createFooter() {
     `;
 }
 
-// Insert footer into the page
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.container');
     if (container) {

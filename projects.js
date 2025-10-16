@@ -1,8 +1,3 @@
-/**
- * Projects functionality with clean architecture and comprehensive error handling
- */
-
-// Configuration constants
 const CONFIG = {
     MOBILE_BREAKPOINT: 768,
     RESIZE_DEBOUNCE: 150,
@@ -10,12 +5,8 @@ const CONFIG = {
     HOVER_DELAY: 50
 };
 
-// Projects data - will be loaded from JSON file
 let PROJECTS_DATA = [];
 
-/**
- * Load projects data from JSON file
- */
 async function loadProjectsData() {
     try {
         const response = await fetch('/projects.json');
@@ -34,10 +25,7 @@ async function loadProjectsData() {
     }
 }
 
-/**
- * Main ProjectsManager class handling all projects functionality
- */
-class ProjectsManager {
+class ProjectManager {
     constructor() {
         this.state = {
             projects: [...PROJECTS_DATA],
@@ -56,7 +44,7 @@ class ProjectsManager {
     }
 
     /**
-     * Initialize the projects manager
+     * Initialize project manager
      */
     init() {
         try {
@@ -86,7 +74,6 @@ class ProjectsManager {
             const data = await response.json();
             if (!Array.isArray(data)) return; // invalid shape, keep fallback
 
-            // Basic normalization to ensure required fields exist
             const normalized = data
                 .filter(p => p && typeof p === 'object' && p.id && p.title)
                 .map(p => ({
@@ -107,7 +94,6 @@ class ProjectsManager {
             this.preloadImages();
             console.log('Loaded projects from projects.json');
         } catch (e) {
-            // Non-fatal: fall back to embedded data
             console.debug('Could not load projects.json; using embedded data');
         }
     }
@@ -273,7 +259,6 @@ class ProjectsManager {
         }
 
         try {
-            // Clear existing content and listeners
             this.elements.projectsList.innerHTML = '';
             
             // Render each project
@@ -893,7 +878,7 @@ async function initializeProjects() {
         await loadProjectsData();
         
         // Create new instance
-        projectsManager = new ProjectsManager();
+        projectsManager = new ProjectManager();
         
         // Make it globally accessible for testing/debugging
         if (typeof window !== 'undefined') {
@@ -930,5 +915,5 @@ if (document.readyState === 'loading') {
 
 // Export for external access if needed
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { ProjectsManager, initializeProjects };
+    module.exports = { ProjectsManager: ProjectManager, initializeProjects };
 }

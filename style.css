@@ -83,7 +83,6 @@ footer.fade-in {
     animation: fadeInAnimation 0.5s ease-in-out forwards, slideUpAnimation 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     opacity: 0;
     transform: translateY(20px);
-    /* Delay is now applied via specific classes */
 }
 
 @keyframes fadeInAnimation {
@@ -146,76 +145,6 @@ footer.fade-in {
     max-width: 90%;
 }
 
-.timeline {
-    margin-bottom: 3rem;
-}
-
-.timeline h2 {
-    font-size: 1.5rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
-}
-
-.timeline-item {
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: 2.5rem;
-}
-
-.timeline-item:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: #d4d4d4;
-    border-radius: 50%;
-}
-.timeline-item:not(:last-child):after {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 20px;
-    width: 2px;
-    height: calc(100% - 10px);
-    background-color: var(--border);
-}
-
-.timeline-item h3 {
-    font-size: 1.25rem;
-    font-weight: 500;
-}
-
-.timeline-item .sub-info {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-}
-
-.timeline-item ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.timeline-item ul li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.25rem;
-    position: relative;
-}
-
-.timeline-item ul li::before {
-    content: "–";
-    position: absolute;
-    left: 0;
-    color: var(--text-secondary);
-}
-
-.timeline-item p {
-    color: var(--text-secondary);
-}
-
-/* RESPONSIVENESS */
 @media (max-width: 768px) {
     .hero-header {
         flex-direction: column;
@@ -268,26 +197,12 @@ footer.fade-in {
         padding: 0;
         max-width: 100%;
     }
-
-    .timeline h2 {
-         border-bottom: 2px solid #000;
-    }
-
-    .timeline-item:before, .timeline-item:after {
-        display: none;
-    }
-     .timeline-item {
-        padding-left: 0;
-    }
 }
-
-/* --- Connect Section --- */
 
 .connect-section {
     margin-top: 3rem;
     text-align: center;
 }
-
 
 .site-footer {
     margin-top: 3rem;
@@ -360,7 +275,6 @@ footer.fade-in {
     margin-bottom: 2rem; /* Tighter spacing */
 }
 
-/* Special hover effect for standalone elements like wave emoji */
 .connect-anchor {
     text-decoration: none;
     color: inherit;
@@ -393,7 +307,6 @@ footer.fade-in {
     opacity: 1;
 }
 
-/* Inline text links */
 .hover-link {
     text-decoration: none;
     color: inherit;
@@ -632,7 +545,6 @@ footer.fade-in {
     padding-right: 2rem;
     width: 45%;
     flex-shrink: 0;
-    /* Styles for sidebar scrolling removed to ensure it scrolls with the main page */
 }
 
 .projects-list {
@@ -782,9 +694,7 @@ footer.fade-in {
     width: 100%;
     aspect-ratio: 1 / 1;
     height: auto;
-    /* Prevent flex column from shrinking the image when text is long */
     flex: 0 0 auto;
-    /* max-width: 420px; smaller squares on large screens */
     border-radius: 16px;
     overflow: hidden;
     display: flex;
@@ -855,7 +765,6 @@ footer.fade-in {
 
 /* Desktop: ensure project detail is visible */
 @media (min-width: 769px) {
-    /* Desktop: make detail panel sticky */
     .projects-page .project-content {
         position: sticky;
         top: 20px;
@@ -1484,7 +1393,7 @@ footer.fade-in {
 .cv-page .contact-icon img {
     width: 24px;
     height: 24px;
-    position: absolute; /* This was incorrectly set to relative */
+    position: absolute;
 }
 
 /* On CV page, disable hover for language items which are not links */
@@ -1505,7 +1414,6 @@ footer.fade-in {
     opacity: 0;
 }
 
-/* Desktop-only vertical spacing for contact/language lists */
 @media (min-width: 769px) {
     .cv-page .contact-list {
         gap: 0.5rem;
