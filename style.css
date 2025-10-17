@@ -182,23 +182,6 @@ footer.fade-in {
     }
 }
 
-@media print {
-    body {
-        background-color: #fff;
-        color: #000;
-        font-size: 10pt;
-    }
-
-    header {
-        display: none;
-    }
-
-    .container {
-        padding: 0;
-        max-width: 100%;
-    }
-}
-
 .connect-section {
     margin-top: 3rem;
     text-align: center;
@@ -1172,35 +1155,64 @@ footer.fade-in {
     opacity: 1;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.cv-actions {
+    margin: 0;
+}
+
 .download-cv-btn {
     display: inline-block;
     background-color: var(--light-blue);
     color: var(--text-primary);
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 999px;
     text-decoration: none;
     font-weight: 500;
-    margin-bottom: 2rem;
-    transition: transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.download-cv-btn:hover {
+.download-cv-btn:hover:not(:disabled) {
     transform: translateY(-2px);
+    outline: 2px solid rgba(147, 197, 253, 0.5);
+    outline-offset: 2px;
+}
+
+.download-cv-btn:disabled {
+    cursor: wait;
 }
 
 .cv-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-section .section-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
 }
 
 .cv-section h2 {
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .cv-item {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-item:last-of-type {
+    margin-bottom: 0;
 }
 
 .cv-item h4 {
@@ -1225,22 +1237,6 @@ footer.fade-in {
 
 .cv-item ul li {
     margin-bottom: 0.5rem;
-}
-
-.core-skills-section {
-    margin-bottom: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2rem;
-    break-inside: avoid;
-    page-break-inside: avoid;
-}
-
-.core-skills-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
 }
 
 .skills-grid {
@@ -1278,35 +1274,139 @@ footer.fade-in {
     display: none;
 }
 
-/* TODO: Enhance print styles
- * - Add proper page break controls for all sections
- * - Optimize colors for print (convert to grayscale where needed)
- * - Display link URLs after link text (e.g., "LinkedIn (https://...)")
- * - Adjust margins/padding for optimal paper layout
- * - Test color contrast for monochrome printing
- */
 @media print {
-    body {
-        font-size: 10pt;
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    header, .dino-on-line, .download-cv-btn, .site-footer {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    html, body {
+        width: 210mm;
+        height: 297mm;
+    }
+
+    body {
+        background: #fff;
+        padding: 1.5cm;
+        margin: 0;
+    }
+
+    html {
+        font-size: 12px; /* Scales all rem units down for print to help fit */
+    }
+
+    /* Hide elements not needed for PDF */
+    header, .dino-on-line, .cv-actions, .site-footer, nav, .cv-photo-hover {
+        display: none !important;
+    }
+
+    .container {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .cv-photo {
+        opacity: 1 !important;
+    }
+
+    .hero-cv {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        text-align: left !important;
+        gap: 2rem !important; /* Ensure space between image and text */
+    }
+
+    .hero-cv-image {
+        width: 140px !important; /* Slightly smaller image because it overlaps with text */
+        height: 140px !important;
+        flex-shrink: 0;
+    }
+
+    .hero-cv-text,
+    .hero-cv h1,
+    .hero-cv .subtitle {
+        text-align: left !important;
+    }
+    
+    /* Display clean URLs for specific links in print */
+    a[href="https://www.linkedin.com/in/danielbilyk/"] .contact-name,
+    a[href="https://github.com/danielbilyk"] .contact-name {
         display: none;
     }
+    
+    a[href="https://www.linkedin.com/in/danielbilyk/"]::after {
+        content: "linkedin.com/in/danielbilyk";
+        font-size: inherit;
+        color: inherit;
+        font-weight: 500;
+    }
+    
+    a[href="https://github.com/danielbilyk"]::after {
+        content: "github.com/danielbilyk";
+        font-size: inherit;
+        color: inherit;
+        font-weight: 500;
+    }
 
+    /* Prevent breaking inside elements */
+    .hero-cv, .connect-section, .cv-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Adjust spacing for print */
+    .cv-page .connect-section {
+        margin-bottom: 1.25rem;
+    }
+    .cv-section {
+        padding-top: 1.25rem;
+    }
+    #cv-content .cv-section:first-of-type {
+        padding-top: 0;
+    }
+    .cv-section .section-header {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.25rem;
+    }
+    .cv-item {
+        margin-top: 0.75rem;
+        margin-bottom: 0;
+    }
+    .cv-item:first-of-type {
+        margin-top: 0;
+    }
+    .cv-item .sub-info {
+        margin-bottom: 0.25rem;
+    }
+    .cv-item p,
+    .cv-item ul {
+        margin-bottom: 0.25rem;
+    }
+    .cv-item ul {
+        margin-top: 0.25rem;
+    }
+    .cv-item ul li {
+        margin-bottom: 0.15rem;
+    }
+
+    /* Footer */
     .print-footer {
         display: block;
         position: fixed;
-        bottom: 0;
+        bottom: 0.5cm;
+        left: 0;
+        right: 0;
         width: 100%;
         text-align: center;
-        font-size: 9pt;
-        color: #666;
-    }
-
-    .core-skills-section, .skills-grid, .skill-category {
-        break-inside: avoid;
-        page-break-inside: avoid;
+        font-size: 7.5pt;
+        color: var(--text-secondary);
+        font-style: italic;
     }
 }
 
@@ -1394,11 +1494,6 @@ footer.fade-in {
     width: 24px;
     height: 24px;
     position: absolute;
-}
-
-/* On CV page, disable hover for language items which are not links */
-.cv-page div.contact-item {
-    cursor: default;
 }
 
 .cv-page div.contact-item:hover {

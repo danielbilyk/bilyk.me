@@ -372,4 +372,48 @@ window.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('focus', loadHoverPhoto, { once: true });
     }
 
+    // PDF Generation Button
+    const pdfBtn = document.getElementById('generate-pdf-btn');
+    if (pdfBtn) {
+        pdfBtn.addEventListener('click', async function() {
+            const originalText = this.textContent;
+            
+            // Show loading state
+            this.textContent = 'Generating PDF...';
+            this.disabled = true;
+            this.style.opacity = '0.6';
+            this.style.cursor = 'wait';
+            
+            // Small delay to ensure the button state updates visually
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Trigger print dialog
+            window.print();
+            
+            // Wait a bit for the print dialog to be handled
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Try to redirect to the PDF
+            try {
+                const response = await fetch('/work/cv.pdf', { method: 'HEAD' });
+                if (response.ok) {
+                    // PDF exists, redirect to it
+                    window.location.href = '/work/cv.pdf';
+                } else {
+                    // PDF doesn't exist, stay on page and reset button
+                    this.textContent = originalText;
+                    this.disabled = false;
+                    this.style.opacity = '1';
+                    this.style.cursor = 'pointer';
+                }
+            } catch (error) {
+                // Network error or PDF doesn't exist, stay on page
+                this.textContent = originalText;
+                this.disabled = false;
+                this.style.opacity = '1';
+                this.style.cursor = 'pointer';
+            }
+        });
+    }
+
 });
