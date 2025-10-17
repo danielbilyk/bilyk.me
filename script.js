@@ -375,8 +375,25 @@ window.addEventListener('DOMContentLoaded', () => {
     // PDF Generation Button
     const pdfBtn = document.getElementById('generate-pdf-btn');
     if (pdfBtn) {
+        let originalText = 'Get as PDF';
+        
+        // Reset button state function
+        function resetButtonState() {
+            pdfBtn.textContent = originalText;
+            pdfBtn.disabled = false;
+            pdfBtn.style.opacity = '1';
+            pdfBtn.style.cursor = 'pointer';
+        }
+        
+        // Reset button state when page becomes visible again
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                resetButtonState();
+            }
+        });
+        
         pdfBtn.addEventListener('click', async function() {
-            const originalText = this.textContent;
+            originalText = this.textContent;
             
             // Show loading state
             this.textContent = 'Generating PDF...';
@@ -387,8 +404,17 @@ window.addEventListener('DOMContentLoaded', () => {
             // Small delay to ensure the button state updates visually
             await new Promise(resolve => setTimeout(resolve, 100));
             
+            // Set document title for PDF filename
+            const originalTitle = document.title;
+            document.title = 'CV-Bilyk-Daniel';
+            
             // Trigger print dialog
             window.print();
+            
+            // Restore original title after printing
+            setTimeout(() => {
+                document.title = originalTitle;
+            }, 1000);
             
             // Wait a bit for the print dialog to be handled
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -401,17 +427,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     window.location.href = '/work/cv.pdf';
                 } else {
                     // PDF doesn't exist, stay on page and reset button
-                    this.textContent = originalText;
-                    this.disabled = false;
-                    this.style.opacity = '1';
-                    this.style.cursor = 'pointer';
+                    resetButtonState();
                 }
             } catch (error) {
                 // Network error or PDF doesn't exist, stay on page
-                this.textContent = originalText;
-                this.disabled = false;
-                this.style.opacity = '1';
-                this.style.cursor = 'pointer';
+                resetButtonState();
             }
         });
     }
