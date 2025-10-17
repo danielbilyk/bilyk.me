@@ -1274,6 +1274,11 @@ footer.fade-in {
     display: none;
 }
 
+/* Hide PDF-only sections from web view */
+.pdf-only {
+    display: none;
+}
+
 @media print {
     * {
         -webkit-print-color-adjust: exact !important;
@@ -1282,7 +1287,17 @@ footer.fade-in {
 
     @page {
         size: A4;
+        margin: 1.0cm 0 0 0;
+    }
+
+    /* First page has no top margin 'cause it's good enough already */
+    @page :first {
         margin: 0;
+    }
+
+    /* Show PDF-only sections */
+    .pdf-only {
+        display: block !important;
     }
 
     html, body {
@@ -1319,7 +1334,7 @@ footer.fade-in {
         flex-direction: row !important;
         align-items: center !important;
         text-align: left !important;
-        gap: 2rem !important; /* Ensure space between image and text */
+        gap: 2rem !important;
     }
 
     .hero-cv-image {
@@ -1395,19 +1410,20 @@ footer.fade-in {
         margin-bottom: 0.15rem;
     }
 
-    /* Footer */
     .print-footer {
         display: block;
-        position: fixed;
-        bottom: 0.5cm;
-        left: 0;
-        right: 0;
         width: 100%;
         text-align: center;
         font-size: 7.5pt;
         color: var(--text-secondary);
         font-style: italic;
+        margin-top: 1.5cm;
     }
+    
+    .print-footer p {
+        margin: 0;
+    }
+    
 }
 
 @media (max-width: 768px) {
