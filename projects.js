@@ -19,7 +19,6 @@ async function loadProjectsData() {
         return data;
     } catch (error) {
         console.error('Error loading projects data:', error);
-        // Fallback to empty array if loading fails
         PROJECTS_DATA = [];
         throw error;
     }
@@ -56,8 +55,6 @@ class ProjectManager {
             this.loadProjectsFromJson();
             this.preloadImages();
             this.state.isInitialized = true;
-            
-            console.log('ProjectsManager initialized successfully');
         } catch (error) {
             console.error('Failed to initialize ProjectsManager:', error);
             this.showErrorState();
@@ -110,7 +107,6 @@ class ProjectManager {
                     img.onload = () => {
                         this.state.imageCache.set(project.image, img);
                         this.state.preloadedImages.add(project.image);
-                        console.log(`Preloaded image for ${project.title}`);
                     };
                     img.onerror = () => {
                         console.warn(`Failed to preload image: ${project.image}`);
@@ -361,14 +357,6 @@ class ProjectManager {
 
             projectEl.addEventListener('mouseenter', mouseEnterHandler);
             projectEl.addEventListener('mouseleave', mouseLeaveHandler);
-            
-            // Add keyboard support for desktop too
-            projectEl.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    this.showProject(project);
-                }
-            });
         }
     }
 
@@ -390,7 +378,6 @@ class ProjectManager {
                 this.showDesktopProject(project);
             }
         } catch (error) {
-            console.error('Error showing project:', error);
         }
     }
 
@@ -401,7 +388,6 @@ class ProjectManager {
         const { projectContent, projectImg, projectTitle, projectDescription, projectLink } = this.elements;
         
         if (!projectContent) {
-            console.warn('Desktop project content elements not found');
             return;
         }
 
@@ -420,8 +406,6 @@ class ProjectManager {
                 clearTimeout(this.timers.hideProject);
                 delete this.timers.hideProject;
             }
-
-            // Dino stays visible and fixed on the right now
 
             // Load image first, then sync text and reveal together
             if (projectImg) {
@@ -461,7 +445,7 @@ class ProjectManager {
         // If a project is already visible, transition smoothly
         if (projectContent.classList.contains('active')) {
             projectContent.classList.remove('active');
-            setTimeout(performUpdate, 150); // Reduced delay for snappier transitions
+            setTimeout(performUpdate, 150);
         } else {
             performUpdate();
         }
@@ -474,7 +458,6 @@ class ProjectManager {
         const { projectOverlay, overlayImg, overlayTitle, overlayDescription, overlayLink } = this.elements;
         
         if (!projectOverlay) {
-            console.warn('Mobile overlay elements not found');
             return;
         }
 
@@ -525,7 +508,6 @@ class ProjectManager {
             }
 
         } catch (error) {
-            console.error('Error in showMobileProject:', error);
         }
     }
 
@@ -618,21 +600,6 @@ class ProjectManager {
     }
 
     /**
-     * Set image source with proper error handling
-     */
-    setImageSource(imgElement, targetSrc, altText, fallbackSrc) {
-        // Kept for backward compatibility; prefer loadImageSmoothly
-        imgElement.src = targetSrc || fallbackSrc;
-                imgElement.alt = altText || 'Project showcase image';
-        imgElement.onerror = () => {
-            if (imgElement.src !== fallbackSrc) {
-                imgElement.src = fallbackSrc;
-                imgElement.alt = 'Image not found';
-            }
-        };
-    }
-
-    /**
      * Toggle loading UI on image container
      */
     setLoadingState(container, isLoading) {
@@ -669,7 +636,6 @@ class ProjectManager {
             // Remove class from body to show dino again
             document.body.classList.remove('project-viewing');
         } catch (error) {
-            console.error('Error hiding project:', error);
         }
     }
 
@@ -693,14 +659,11 @@ class ProjectManager {
                 // Keep in flow, just visually hide to avoid scroll jumps
                 projectContent.classList.add('hidden');
                 projectContent.classList.remove('active');
-                
-                // Dino remains visible; no toggling
-                
+                                
                 delete this.timers.hideProject;
             }, CONFIG.TRANSITION_DELAY);
             
         } catch (error) {
-            console.error('Error in hideDesktopProject:', error);
         }
     }
 
@@ -715,7 +678,6 @@ class ProjectManager {
         try {
             projectOverlay.classList.remove('active');
         } catch (error) {
-            console.error('Error in hideMobileProject:', error);
         }
     }
 
@@ -819,8 +781,6 @@ class ProjectManager {
                 root.style.setProperty('--project-sticky-top', `${Math.round(topOffset)}px`);
             }
         } catch (e) {
-            // Non-fatal
-            console.debug('updateStickyTopOffset failed', e);
         }
     }
 
@@ -859,7 +819,6 @@ class ProjectManager {
 
             root.style.setProperty('--dino-sticky-top', `${desiredTop}px`);
         } catch (e) {
-            console.debug('updateDinoStickyTop failed', e);
         }
     }
 }
@@ -869,25 +828,18 @@ let projectsManager = null;
 
 async function initializeProjects() {
     try {
-        // Clean up existing instance if any
         if (projectsManager) {
             projectsManager.cleanup();
         }
         
-        // Load projects data first
         await loadProjectsData();
-        
-        // Create new instance
         projectsManager = new ProjectManager();
         
-        // Make it globally accessible for testing/debugging
         if (typeof window !== 'undefined') {
             window.projectsManager = projectsManager;
         }
         
     } catch (error) {
-        console.error('Failed to initialize projects:', error);
-        // Show error state if data loading fails
         showProjectsLoadingError();
     }
 }
@@ -911,9 +863,4 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeProjects);
 } else {
     initializeProjects();
-}
-
-// Export for external access if needed
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { ProjectsManager: ProjectManager, initializeProjects };
 }
