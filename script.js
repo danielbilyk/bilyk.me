@@ -411,28 +411,11 @@ window.addEventListener('DOMContentLoaded', () => {
             // Trigger print dialog
             window.print();
             
-            // Restore original title after printing
+            // Restore original title and reset button
             setTimeout(() => {
                 document.title = originalTitle;
-            }, 1000);
-            
-            // Wait a bit for the print dialog to be handled
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // Try to redirect to the PDF
-            try {
-                const response = await fetch('/work/cv.pdf', { method: 'HEAD' });
-                if (response.ok) {
-                    // PDF exists, redirect to it
-                    window.location.href = '/work/cv.pdf';
-                } else {
-                    // PDF doesn't exist, stay on page and reset button
-                    resetButtonState();
-                }
-            } catch (error) {
-                // Network error or PDF doesn't exist, stay on page
                 resetButtonState();
-            }
+            }, 500);
         });
     }
 
