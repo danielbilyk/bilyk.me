@@ -1,17 +1,16 @@
 Options -MultiViews
 RewriteEngine On
-RewriteBase /
 
 # Route /work/cv to PDF (exact match first)
-RewriteRule ^work/cv/?$ static/CV-Bilyk-Daniel.pdf [L]
+RewriteRule ^work/cv$ /static/CV-Bilyk-Daniel.pdf [L]
 
 # Route /work/cv.pdf to PDF
-RewriteRule ^work/cv\.pdf$ static/CV-Bilyk-Daniel.pdf [L]
+RewriteRule ^work/cv\.pdf$ /static/CV-Bilyk-Daniel.pdf [L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/work/cv/?$
+RewriteCond %{REQUEST_URI} !^/work/cv$
 RewriteCond %{REQUEST_URI} !^/work/cv\.pdf$
 RewriteRule ^([^\.]+)$ $1.html [L]
 
