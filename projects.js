@@ -449,6 +449,7 @@ class ProjectManager {
 
             // Show overlay immediately
             projectOverlay.classList.add('active');
+            document.body.classList.add('overlay-active');
 
             // Update overlay content after image is ready
             if (overlayImg) {
@@ -659,6 +660,7 @@ class ProjectManager {
 
         try {
             projectOverlay.classList.remove('active');
+            document.body.classList.remove('overlay-active');
         } catch (error) {
         }
     }

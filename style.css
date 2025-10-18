@@ -817,16 +817,25 @@ footer.fade-in {
         left: 0;
         width: 100vw;
         height: 100vh;
+        height: 100dvh;
         background: var(--background);
-        z-index: 1000;
+        z-index: 9999;
         padding: 2rem;
         overflow-y: auto;
         transform: translateX(100%);
         transition: transform 0.3s ease;
+        isolation: isolate;
     }
     
     .project-overlay.active {
         transform: translateX(0);
+    }
+    
+    /* Prevent body scroll when overlay is active */
+    body.overlay-active {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
     }
     
     .project-overlay-header {
@@ -858,14 +867,18 @@ footer.fade-in {
         position: absolute;
         top: 0;
         left: 0;
-        line-height: 1;
+        line-height: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
         -webkit-tap-highlight-color: transparent;
+        padding: 0;
     }
     
     .back-button span {
-        display: block;
-        transform: translateX(-1px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
     }
     
     .back-button:hover {
