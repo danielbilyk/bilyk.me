@@ -375,7 +375,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const pdfBtn = document.getElementById('generate-pdf-btn');
     if (pdfBtn) {
         pdfBtn.addEventListener('click', function() {
-            window.open('/work/cv', '_blank');
+            window.open('/work/cv.pdf', '_blank');
         });
     }
 
