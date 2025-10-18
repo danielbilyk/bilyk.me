@@ -1379,6 +1379,16 @@ footer.fade-in {
     .cv-page .connect-section {
         margin-bottom: 1.25rem;
     }
+    
+    /* Force 3-column layout for Contact/Fluent/Skills in print */
+    .cv-page .connect-grid {
+        grid-template-columns: 1fr 1fr 2.5fr !important;
+        gap: 3rem !important;
+    }
+    
+    .cv-page .connect-column:last-child {
+        grid-column: auto !important;
+    }
     .cv-section {
         padding-top: 1.25rem;
     }

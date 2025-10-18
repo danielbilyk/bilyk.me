@@ -372,50 +372,10 @@ window.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('focus', loadHoverPhoto, { once: true });
     }
 
-    // PDF Generation Button
     const pdfBtn = document.getElementById('generate-pdf-btn');
     if (pdfBtn) {
-        let originalText = 'Get as PDF';
-        
-        // Reset button state function
-        function resetButtonState() {
-            pdfBtn.textContent = originalText;
-            pdfBtn.disabled = false;
-            pdfBtn.style.opacity = '1';
-            pdfBtn.style.cursor = 'pointer';
-        }
-        
-        // Reset button state when page becomes visible again
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                resetButtonState();
-            }
-        });
-        
-        pdfBtn.addEventListener('click', async function() {
-            originalText = this.textContent;
-            
-            // Show loading state
-            this.textContent = 'Generating PDF...';
-            this.disabled = true;
-            this.style.opacity = '0.6';
-            this.style.cursor = 'wait';
-            
-            // Small delay to ensure the button state updates visually
-            await new Promise(resolve => setTimeout(resolve, 100));
-            
-            // Set document title for PDF filename
-            const originalTitle = document.title;
-            document.title = 'CV-Bilyk-Daniel';
-            
-            // Trigger print dialog
-            window.print();
-            
-            // Restore original title and reset button
-            setTimeout(() => {
-                document.title = originalTitle;
-                resetButtonState();
-            }, 500);
+        pdfBtn.addEventListener('click', function() {
+            window.open('/work/cv', '_blank');
         });
     }
 

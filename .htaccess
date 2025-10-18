@@ -1,5 +1,13 @@
 RewriteEngine On
 
+# Route /work/cv (with or without .pdf) to static/CV-Bilyk-Daniel.pdf
+RewriteRule ^work/cv(\.pdf)?$ static/CV-Bilyk-Daniel.pdf [L]
+
+# Set proper filename for CV downloads
+<Files "CV-Bilyk-Daniel.pdf">
+    Header set Content-Disposition "inline; filename=\"CV-Bilyk-Daniel.pdf\""
+</Files>
+
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
