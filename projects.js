@@ -14,7 +14,23 @@ async function loadProjectsData() {
             throw new Error(`Failed to load projects data: ${response.status}`);
         }
         const data = await response.json();
-        PROJECTS_DATA = data;
+        // Normalize shape to keep rendering logic consistent
+        const normalized = Array.isArray(data)
+            ? data
+                .filter(p => p && typeof p === 'object' && p.id && p.title)
+                .map(p => ({
+                    id: String(p.id),
+                    title: String(p.title),
+                    subtitle: p.subtitle ? String(p.subtitle) : undefined,
+                    year: p.year ? String(p.year) : '',
+                    summary: p.summary ? String(p.summary) : '',
+                    description: p.description ? String(p.description) : '',
+                    image: p.image ? String(p.image) : '',
+                    link: p.link || null
+                }))
+            : [];
+
+        PROJECTS_DATA = normalized;
         console.log('Projects data loaded successfully');
         return data;
     } catch (error) {
@@ -51,8 +67,6 @@ class ProjectManager {
             this.updateViewportState();
             this.setupEventListeners();
             this.renderProjects();
-            // Attempt to replace embedded data with external JSON, then re-render
-            this.loadProjectsFromJson();
             this.preloadImages();
             this.state.isInitialized = true;
         } catch (error) {
@@ -61,39 +75,7 @@ class ProjectManager {
         }
     }
 
-    /**
-     * Load projects from external JSON file with graceful fallback
-     */
-    async loadProjectsFromJson() {
-        try {
-            const response = await fetch('/projects.json', { cache: 'no-cache' });
-            if (!response.ok) return; // keep fallback
-            const data = await response.json();
-            if (!Array.isArray(data)) return; // invalid shape, keep fallback
-
-            const normalized = data
-                .filter(p => p && typeof p === 'object' && p.id && p.title)
-                .map(p => ({
-                    id: String(p.id),
-                    title: String(p.title),
-                    subtitle: p.subtitle ? String(p.subtitle) : undefined,
-                    year: p.year ? String(p.year) : '',
-                    summary: p.summary ? String(p.summary) : '',
-                    description: p.description ? String(p.description) : '',
-                    image: p.image ? String(p.image) : '',
-                    link: p.link || null
-                }));
-
-            if (normalized.length === 0) return;
-
-            this.state.projects = normalized;
-            this.renderProjects();
-            this.preloadImages();
-            console.log('Loaded projects from projects.json');
-        } catch (e) {
-            console.debug('Could not load projects.json; using embedded data');
-        }
-    }
+    
 
     /**
      * Preload all project images for smooth transitions
