@@ -2,8 +2,7 @@ Options -MultiViews
 RewriteEngine On
 
 # Route /work/cv.pdf to PDF and suggest a filename for download
-RewriteRule ^work/cv\.pdf$ /static/CV-Bilyk-Daniel.pdf [L,E=CV_DOWNLOAD:true]
-Header set Content-Disposition "inline; filename=\"CV-Bilyk-Daniel.pdf\"" env=CV_DOWNLOAD
+RewriteRule ^work/cv\.pdf$ /static/CV-Bilyk-Daniel.pdf [L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
