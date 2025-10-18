@@ -9,9 +9,11 @@ RewriteRule ^work/cv\.pdf$ /static/CV-Bilyk-Daniel.pdf [L]
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/work/cv$
+RewriteCond %{REQUEST_URI} !^/work/cv\.pdf$
 RewriteRule ^([^\.]+)$ $1.html [L]
 
-# Redirect .html URLs to clean URLs (for SEO and consistency)
+# Redirect .html URLs to clean URLs
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
 RewriteRule ^ /%1? [NC,L,R=301]
 
