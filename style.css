@@ -863,22 +863,13 @@ footer.fade-in {
         justify-content: center;
         transition: all 0.3s ease;
         color: var(--text-primary);
+        font-size: 1.4rem;
+        font-weight: bold;
         flex-shrink: 0;
         position: absolute;
         top: 0;
         left: 0;
         -webkit-tap-highlight-color: transparent;
-        padding: 0;
-    }
-    
-    .back-button span {
-        display: block;
-        width: 20px;
-        height: 20px;
-        border-left: 3px solid var(--text-primary);
-        border-bottom: 3px solid var(--text-primary);
-        transform: rotate(45deg);
-        margin-left: 3px;
     }
     
     .back-button:hover {
