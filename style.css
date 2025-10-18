@@ -50,6 +50,14 @@ header {
     transition: color 0.3s ease;
     z-index: 1;
     font-weight: 500;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.nav-link:focus-visible {
+    outline: 2px solid rgba(229, 243, 253, 0.85);
+    outline-offset: 4px;
+    border-radius: 8px;
 }
 
 .nav-link.active {

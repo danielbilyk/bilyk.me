@@ -21,6 +21,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
         links.forEach(link => {
             link.addEventListener('mouseenter', () => moveIndicator(link));
+            
+            // Remove focus after clicking to prevent sticky focus state
+            link.addEventListener('click', (e) => {
+                // Small delay to let navigation start, then blur
+                setTimeout(() => {
+                    e.target.blur();
+                }, 100);
+            });
         });
 
         container.addEventListener('mouseleave', () => {
