@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # Route /work/cv (with or without .pdf) to static/CV-Bilyk-Daniel.pdf
-RewriteRule ^work/cv(\.pdf)?$ static/CV-Bilyk-Daniel.pdf [L]
+RewriteRule ^work/cv(\.pdf)?$ /static/CV-Bilyk-Daniel.pdf [L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
