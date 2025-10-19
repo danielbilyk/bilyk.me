@@ -1170,14 +1170,24 @@ footer.fade-in {
     opacity: 1;
 }
 
-.hero-cv-image:hover .cv-photo,
+/* Toggle state for all devices */
 .hero-cv-image.photo-toggled .cv-photo {
     opacity: 0;
 }
 
-.hero-cv-image:hover .cv-photo-hover,
 .hero-cv-image.photo-toggled .cv-photo-hover {
     opacity: 1;
+}
+
+/* Hover effect only on devices that support proper hovering (desktop) */
+@media (hover: hover) and (pointer: fine) {
+    .hero-cv-image:hover .cv-photo {
+        opacity: 0;
+    }
+
+    .hero-cv-image:hover .cv-photo-hover {
+        opacity: 1;
+    }
 }
 
 .section-header {
