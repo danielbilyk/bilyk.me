@@ -378,6 +378,11 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // For accessibility: also lazy load on focus
         container.addEventListener('focus', loadHoverPhoto, { once: true });
+        
+        // Toggle photo on click/tap for mobile
+        container.addEventListener('click', () => {
+            container.classList.toggle('photo-toggled');
+        });
     }
 
     const pdfBtn = document.getElementById('generate-pdf-btn');

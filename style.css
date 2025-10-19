@@ -1081,6 +1081,7 @@ footer.fade-in {
     width: 150px;
     height: 150px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .hero-cv-text {
@@ -1169,11 +1170,13 @@ footer.fade-in {
     opacity: 1;
 }
 
-.hero-cv-image:hover .cv-photo {
+.hero-cv-image:hover .cv-photo,
+.hero-cv-image.photo-toggled .cv-photo {
     opacity: 0;
 }
 
-.hero-cv-image:hover .cv-photo-hover {
+.hero-cv-image:hover .cv-photo-hover,
+.hero-cv-image.photo-toggled .cv-photo-hover {
     opacity: 1;
 }
 
